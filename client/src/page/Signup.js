@@ -22,7 +22,7 @@ const SignupWrap = styled.div`
 `
 const LogoImg = styled.img`
   width: 12vh;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 `
 
 const PrevBtn = styled.div`
