@@ -1,8 +1,8 @@
 import Header from '../components/Header';
 
-const Main = () => {
+const Main = ({ isLogedIn }) => {
   return <>
-    <Header />
+    <Header isLogedIn={isLogedIn}/>
   </>
 }
 

@@ -9,6 +9,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-align: center;
 }
 
 code {
@@ -20,6 +21,10 @@ a {
   color: #333;
   text-decoration: none;
   cursor: pointer;
+  display: block;
+}
+a:hover {
+  color: #333;
 }
 a.logo {
   font-size: 22px;
@@ -30,4 +35,10 @@ ul {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+button {
+  border: none;
+  background: #eee;
+  border-radius: 6px;
 }

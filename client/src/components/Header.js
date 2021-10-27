@@ -3,20 +3,38 @@ import { Link } from 'react-router-dom'
 // import { LinkContainer } from 'react-router-bootstrap';
 import { useState } from 'react'
 import styled from 'styled-components'
+import Symbol from '../assets/images/Symbol.svg';
 
 const StyledHeader = styled.header`
-  padding: 1rem 2rem;
+  height: 10vh;
+  padding: 0 2rem;
   display: flex;
   justify-content: space-between;
-  align-items: start;
+  align-items: center;
+  position: relative;
+
+  > .profile {
+    width: 10vh;
+    height: 4vh;
+    line-height: 4vh;
+  }
+  img {
+    height: 8vh;
+  }
 
   li {
-    padding: 2px 0px;
+    width: 10vh;
     text-align: center;
+    line-height: 2;
+    border: 1px solid #eee;
+    cursor: pointer;
+  }
+  li:hover {
+    background: #eee;
   }
 `
 
-export default function Header () {
+export default function Header ({isLogedIn}) {
   const [show, setShow] = useState(false);
   const showDropdown = () => {
     setShow(!show);
@@ -24,22 +42,22 @@ export default function Header () {
   const hideDropdown = () => {
     setShow(false);
   }
-  // 프로필 이미지, 닉네임
+  // 프로필 이미지(api 랜덤이미지), 닉네임
   // hover => drop down 기능 구현
   return <StyledHeader className="header">
     <div>
-      <Link to='/' className="logo">Minimanimo</Link>
+      <Link to='/' className="logo"><img src={Symbol} alt="Symbol" /></Link>
     </div>
     <div className="profile" onMouseLeave={hideDropdown} show={show}
       onMouseEnter={showDropdown}>
-      <div>hover 영역
-    {show ? 
-    <ul>
-      <li><Link to="/mypage">Mypage</Link></li>
-      <li>Logout</li>
-    </ul>
-    : null }
-    </div>
+      <div><Link to='/signin'>Sing In</Link>
+        {isLogedIn ? show ? 
+        <ul>
+          <li><Link to="/mypage">MyPage</Link></li>
+          <li><Link to='/'>LogOut</Link></li>
+        </ul>
+        : null : null}
+      </div>
     </div>
   </StyledHeader>
 };
