@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "server": "nodemon server/index",
-    "client": "./node_modules/.bin/concurrently \"npm run server\" \"npm run client\"",
+    "client": "npm start --prefix client",
     "predev": "kill -9 $(lsof -i :5000 | grep -i -E -o '\\s[0-9]+\\s') || true",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "data:import": "node server/seeder",

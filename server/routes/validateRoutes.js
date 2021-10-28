@@ -1,8 +1,9 @@
 import express from "express";
+
 import {
   validateEmail,
   validateNickname,
-} from "../controllers/validateController";
+} from "../controllers/validateController.js";
 const router = express.Router();
 
 // endpoint => /api/validate
