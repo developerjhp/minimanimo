@@ -2,6 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import colors from "colors";
 import connectDB from "./config/db.js";
+import userRoutes from "./routes/userRoutes.js";
+import { errHandler, notFound } from "./middleware/error.js";
 
 dotenv.config();
 connectDB();
@@ -14,8 +16,11 @@ app.get("/", (req, res) => {
 });
 
 // Route Handler Part
+app.use("/users", userRoutes);
 
 // custom error handler Part
+app.use(notFound);
+app.use(errHandler);
 
 const PORT = process.env.PORT || 5000;
 
