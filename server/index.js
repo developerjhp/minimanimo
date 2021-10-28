@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import colors from "colors";
 import connectDB from "./config/db.js";
+import validateRoutes from "./routes/validateRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import { errHandler, notFound } from "./middleware/error.js";
 
@@ -16,7 +17,8 @@ app.get("/", (req, res) => {
 });
 
 // Route Handler Part
-app.use("/users", userRoutes);
+app.use("/api/validate", validateRoutes);
+app.use("/api/users", userRoutes);
 
 // custom error handler Part
 app.use(notFound);

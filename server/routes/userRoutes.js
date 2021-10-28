@@ -9,6 +9,7 @@ import { protect } from "../middleware/auth.js"; // for private routes
 
 const router = express.Router();
 
+// endpoint => /api/users
 router.route("/").post(registerUser); // 회원가입 요청
 router.route("/login").post(authUser); // 로그인 요청
 router

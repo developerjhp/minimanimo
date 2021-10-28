@@ -4,13 +4,13 @@ const users = [
   {
     nickname: "Cheolsoo",
     email: "soo@example.com",
-    password: bcrypt.hashSync("123456", 10),
+    password: bcrypt.hashSync("12345678", 10),
     image: "/images/users/1.jpeg",
   },
   {
     nickname: "Younghee",
     email: "hee@example.com",
-    password: bcrypt.hashSync("123456", 10),
+    password: bcrypt.hashSync("12345678", 10),
     image: "/images/users/2.jpeg",
   },
 ];

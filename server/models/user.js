@@ -1,19 +1,28 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
+import validator from "validator";
 
 const userSchema = mongoose.Schema(
   {
     nickname: {
       type: String,
+      minlength: [2, "닉네임은 2자 이상 입력해주세요."],
+      maxLength: [10, "닉네임은 10자 미만이어야 합니다."],
+      trim: true,
       required: true,
     },
     email: {
       type: String,
+      lowercase: true,
+      trim: true,
+      validate: [validator.isEmail, "이메일 형식에 맞게 작성해주세요"],
       required: true, // 필수 항목
       unique: true, // 동일 이메일이 없도록 설정
     },
     password: {
       type: String,
+      minlength: [8, "비밀번호를 8자 이상 입력해주세요."],
+      trim: true,
       required: true,
     },
     image: {
