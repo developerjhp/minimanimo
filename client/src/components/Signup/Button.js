@@ -7,9 +7,8 @@ const BtnWrap = styled.div`
   margin-top: 1.5rem;
   display: flex;
 `
-const SignInBtn = styled.button`
+const SignUpBtn = styled.button`
   flex: 1 0 0;
-  margin-left: 0.5rem;
   padding: 0.5rem 0;
   font-weight: bold;
   color: #fff;
@@ -17,25 +16,6 @@ const SignInBtn = styled.button`
   
   &:hover {
     background-color: #EDC51E;
-  }
-`
-const SignUpBtn = styled.button`
-  flex: 1 0 0;
-  margin-right: 0.5rem;
-  padding: 0 0 0 0;
-  font-weight: bold;
-
-  &:hover {
-    background-color: #4D2C21;
-    color: #fff;
-  }
-  > a:hover {
-    color: #fff;
-  }
-  > a {
-    height: 40px;
-    padding-top: 8px;
-
   }
 `
 const ValidText = styled.div`
@@ -100,8 +80,7 @@ const Button = ({inputInfo, isLogedIn,isLogedInhandler}) => {
   return <>
     <ValidText className={displayValidText ? "valid" : ""}>&#42;아이디 또는 비밀번호가 잘못 입력 되었습니다.<br /><b>아이디</b>와 <b>비밀번호</b>를 정확히 입력해 주세요.</ValidText> 
     <BtnWrap>
-      <SignUpBtn><Link to='/signup'>Sign Up</Link></SignUpBtn>
-      <SignInBtn onClick={validcheck}>Sign In</SignInBtn>
+      <SignUpBtn onClick={validcheck}>Sign Up</SignUpBtn>
     </BtnWrap>
   </>
 }

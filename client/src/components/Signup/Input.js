@@ -28,7 +28,6 @@ const InputWrap = styled.div`
 const Input = ({inputInfo, setInputInfo}) => {
   // TODO: 서버에 signin 요청 후 잘못됐을때 ValidText 표출 및 input outline 붉은색으로 변경
 
-  
   const InputuserInfo = (e) => {
     if (e.target.type === 'email') {
       setInputInfo({ id: e.target.value, password: inputInfo.password })
@@ -39,8 +38,10 @@ const Input = ({inputInfo, setInputInfo}) => {
 
   return (
     <InputWrap>
+      {/* 입력 내용 : 이메일, 비밀번호, 비밀번호 확인, 닉네임 */}
+      {/* onChange => 유효성 검사 / focusOut => 이메일, 닉네임 중복확인 */}
       <label for="clickid">Email</label>
-      <input id="clickid" type="email" placeholder="email" value={inputInfo.id} onChange={InputuserInfo} />
+      <input id="clickid" type="email" placeholder="email" value={inputInfo.id} onChange={InputuserInfo}/>
       <label for="clickpwd">Password</label>
       <input id="clickpwd" type="password" placeholder="password" value={inputInfo.password} onChange={InputuserInfo}/>
     </InputWrap>
