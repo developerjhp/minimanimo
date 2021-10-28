@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components'
-import Input from '../components/Signin/Input';
+import Input from '../components/Signup/Input';
 import Logo from '../assets/images/Logo.svg';
-import Button from '../components/Signin/Button';
+import Button from '../components/Signup/Button';
 import { FaArrowLeft } from 'react-icons/fa';
 
 const SignupContainer = styled.div`
@@ -12,7 +12,8 @@ const SignupContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  `
+`
+
 const SignupWrap = styled.div`
   width: 50vh;
   padding: 2rem;
@@ -33,15 +34,18 @@ const PrevBtn = styled.div`
   left: 2rem;
   `
 
-const Signup = ({isLogedIn, setIsLogedIn, isLogedInhandler}) => {
+const Signup = ({isLogedIn, isLogedInhandler}) => {
+  // TODO: 회원가입 유효성 검사
+  // 
+
   const [inputInfo, setInputInfo] = useState({ id: '', password: '' });
-  
+
   return <SignupContainer>
     <SignupWrap>
-    <PrevBtn><Link to='/'><FaArrowLeft/></Link></PrevBtn>
+    <PrevBtn><Link to='/signin'><FaArrowLeft/></Link></PrevBtn>
       <LogoImg src={Logo} alt="Logo" />
       <Input inputInfo={inputInfo} setInputInfo={setInputInfo}/>
-      <Button inputInfo={inputInfo} isLogedIn={isLogedIn} setIsLogedIn={setIsLogedIn} isLogedInhandler={isLogedInhandler}/>
+      <Button inputInfo={inputInfo} isLogedIn={isLogedIn} isLogedInhandler={isLogedInhandler}/>
     </SignupWrap>
   </SignupContainer>
 }
@@ -49,6 +53,7 @@ const Signup = ({isLogedIn, setIsLogedIn, isLogedInhandler}) => {
   //  const [Valid, Idvalid] = useState(false);
   // const strongPassword = (str) = {
   //   regExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
+  // 최소 8자 이상하면서, 알파벳과 숫자 및 특수문자(@$!%*#?&) 는 하나 이상 포함해야 합니다
   // }
   // const checkPassword = (e) => {
   //   //  8 ~ 10자 영문, 숫자 조합
@@ -66,7 +71,6 @@ const Signup = ({isLogedIn, setIsLogedIn, isLogedInhandler}) => {
   // var regExp = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/; 비밀번호 체크
 
 export default Signup;
-
 
 // import { useState } from 'react'; 
 // import styled from 'styled-components';

@@ -31,8 +31,8 @@ const PrevBtn = styled.div`
   left: 2rem;
 `
 
-const Signin = ({isLogedIn, setIsLogedIn, isLogedInhandler}) => {
-  
+const Signin = ({isLogedIn,  isLogedInhandler}) => {
+
   const [inputInfo, setInputInfo] = useState({ id: '', password: '' });
   
   return <SigninContainer>
@@ -40,9 +40,9 @@ const Signin = ({isLogedIn, setIsLogedIn, isLogedInhandler}) => {
       <PrevBtn><Link to='/'><FaArrowLeft/></Link></PrevBtn>
       <LogoImg src={Logo} alt="Logo" />
       <Input inputInfo={inputInfo} setInputInfo={setInputInfo}/>
-      <Button inputInfo={inputInfo} isLogedIn={isLogedIn} setIsLogedIn={setIsLogedIn} isLogedInhandler={isLogedInhandler}/>
+      <Button inputInfo={inputInfo} isLogedIn={isLogedIn}  isLogedInhandler={isLogedInhandler}/>
     </SigninWrap>
   </SigninContainer>
 }
-// EFF1F1
+// 
 export default Signin;
