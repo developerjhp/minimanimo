@@ -3,13 +3,13 @@ import User from "../models/user.js";
 import generateToken from "./utils/generateToken.js";
 
 // @desc   Register a new user
-// @route  POST /users
+// @route  POST /api/users
 // @access Public
 const registerUser = asyncHandler(async (req, res) => {
   // 회원가입 요청
 
   const { email, password, nickname } = req.body;
-  
+
   // 이메일 중복 검사
   const userExists = await User.findOne({ email });
 
@@ -17,10 +17,25 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error(`User already exists`);
   }
+
+  const user = await User.create({ email, password, nickname });
+
+  if (user) {
+    res.status(201).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      token: generateToken(user._id),
+    });
+  } else {
+    // 필수 요구사항이 빈다면
+    res.status(404);
+    throw new Error("required element should be fullfilled");
+  }
 });
 
 // @desc   Auth user & get token
-// @route  Post /users/login
+// @route  Post /api/users/login
 // @access Public
 const authUser = asyncHandler(async (req, res) => {
   // 로그인 요청
@@ -44,7 +59,7 @@ const authUser = asyncHandler(async (req, res) => {
 });
 
 // @desc   Get user profile
-// @route  GET /users/profile
+// @route  GET /api/users/profile
 // @access Private
 const getUserProfile = asyncHandler(async (req, res) => {
   // 회원 정보 요청
@@ -64,7 +79,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
 });
 
 // @desc   Update user profile
-// @route  PUT /users/profile
+// @route  PUT /api/users/profile
 // @access Private
 const updateUserProfile = asyncHandler(async (req, res) => {
   // 회원 정보 수정 요청

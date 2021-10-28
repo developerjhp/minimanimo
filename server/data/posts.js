@@ -5,6 +5,9 @@ const posts = [
   {
     content: "BDD 봤냐고...!!",
   },
+  {
+    content: "칸나가 지리지..",
+  },
 ];
 
 export default posts;
