@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components'
-import Input from '../components/Signup/Input';
+import SignUpInput from '../components/Signup/SignUpInput';
 import Logo from '../assets/images/Logo.svg';
-import Button from '../components/Signup/Button';
+import SignUpButton from '../components/Signup/SignUpButton';
 import { FaArrowLeft } from 'react-icons/fa';
 
 const SignupContainer = styled.div`
@@ -13,7 +13,6 @@ const SignupContainer = styled.div`
   justify-content: center;
   align-items: center;
 `
-
 const SignupWrap = styled.div`
   width: 50vh;
   padding: 2rem;
@@ -35,17 +34,17 @@ const PrevBtn = styled.div`
   `
 
 const Signup = ({isLogedIn, isLogedInhandler}) => {
-  // TODO: 회원가입 유효성 검사
-  // 
-
-  const [inputInfo, setInputInfo] = useState({ id: '', password: '' });
-
+  const [signUpInputInfo, setSignUpInputInfo] = useState({ id: '', password: '', nickname: '' });
+  const [signUpValid, setSignUpValid] = useState({id: false, password: false, passwordCheck: false, nickname: false});
+  const [signUpAllCheck, setSignUpAllCheck] = useState(false); // useEffect로 변경
+  // useEffect로 signUpValid 감시 => 다 트루면 변경 => 버튼으로 내려주기
+  
   return <SignupContainer>
     <SignupWrap>
     <PrevBtn><Link to='/signin'><FaArrowLeft/></Link></PrevBtn>
       <LogoImg src={Logo} alt="Logo" />
-      <Input inputInfo={inputInfo} setInputInfo={setInputInfo}/>
-      <Button inputInfo={inputInfo} isLogedIn={isLogedIn} isLogedInhandler={isLogedInhandler}/>
+      <SignUpInput signUpInputInfo={signUpInputInfo} setSignUpInputInfo={setSignUpInputInfo} signUpValid={signUpValid} setSignUpValid={setSignUpValid} />
+      <SignUpButton signUpInputInfo={signUpInputInfo} isLogedIn={isLogedIn} isLogedInhandler={isLogedInhandler}/>
     </SignupWrap>
   </SignupContainer>
 }

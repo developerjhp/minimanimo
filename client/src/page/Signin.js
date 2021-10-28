@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components'
-import Input from '../components/Signin/Input';
+import SignInInput from '../components/Signin/SignInInput';
 import Logo from '../assets/images/Logo.svg';
-import Button from '../components/Signin/Button';
+import SignInButton from '../components/Signin/SignInButton';
 import { FaArrowLeft } from 'react-icons/fa';
 
 const SigninContainer = styled.div`
@@ -32,15 +32,14 @@ const PrevBtn = styled.div`
 `
 
 const Signin = ({isLogedIn,  isLogedInhandler}) => {
-
-  const [inputInfo, setInputInfo] = useState({ id: '', password: '' });
+  const [signInInputInfo, setSignInInputInfo] = useState({ id: '', password: '' });
   
   return <SigninContainer>
     <SigninWrap>
       <PrevBtn><Link to='/'><FaArrowLeft/></Link></PrevBtn>
       <LogoImg src={Logo} alt="Logo" />
-      <Input inputInfo={inputInfo} setInputInfo={setInputInfo}/>
-      <Button inputInfo={inputInfo} isLogedIn={isLogedIn}  isLogedInhandler={isLogedInhandler}/>
+      <SignInInput signInInputInfo={signInInputInfo} setSignInInputInfo={setSignInInputInfo}/>
+      <SignInButton signInInputInfo={signInInputInfo} isLogedIn={isLogedIn}  isLogedInhandler={isLogedInhandler}/>
     </SigninWrap>
   </SigninContainer>
 }

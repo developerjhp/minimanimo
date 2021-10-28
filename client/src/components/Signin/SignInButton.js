@@ -7,8 +7,9 @@ const BtnWrap = styled.div`
   margin-top: 1.5rem;
   display: flex;
 `
-const SignUpBtn = styled.button`
+const SignInBtn = styled.button`
   flex: 1 0 0;
+  margin-left: 0.5rem;
   padding: 0.5rem 0;
   font-weight: bold;
   color: #fff;
@@ -16,6 +17,25 @@ const SignUpBtn = styled.button`
   
   &:hover {
     background-color: #EDC51E;
+  }
+`
+const SignUpBtn = styled.button`
+  flex: 1 0 0;
+  margin-right: 0.5rem;
+  padding: 0 0 0 0;
+  font-weight: bold;
+
+  &:hover {
+    background-color: #4D2C21;
+    color: #fff;
+  }
+  > a:hover {
+    color: #fff;
+  }
+  > a {
+    height: 40px;
+    padding-top: 8px;
+
   }
 `
 const ValidText = styled.div`
@@ -29,7 +49,7 @@ const ValidText = styled.div`
   }
 `
 
-const Button = ({inputInfo, isLogedIn,isLogedInhandler}) => {
+const Button = ({signInInputInfo, isLogedIn, isLogedInhandler}) => {
   // signin 버튼을 클릭하면, 현재 가지고있는 inputInfo를 가지고 서버에게 axios post 요청
   // TODO: inputInfo id, password 유효성검사해서 버튼 눌려도 axios 요청 안가고 바로 문구 표출
   // TODO: input 유효성 검사 
@@ -52,9 +72,9 @@ const Button = ({inputInfo, isLogedIn,isLogedInhandler}) => {
     let idExp = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]+$/;
     let pwdExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
     
-    if (idExp.test(inputInfo.id) && pwdExp.test(inputInfo.password)) {
+    if (idExp.test(signInInputInfo.id) && pwdExp.test(signInInputInfo.password)) {
       try{
-        axios.post('http://localhost:3000/signin', {id : inputInfo.id , password : inputInfo.password})
+        axios.post('http://localhost:3000/signin', {id : signInInputInfo.id , password : signInInputInfo.password})
         .then((res) => {
           // 로그인이 성공했으면, 
           // 응답 확인하고 로그인 상태 변경 => 메인으로 보내주기
@@ -80,7 +100,8 @@ const Button = ({inputInfo, isLogedIn,isLogedInhandler}) => {
   return <>
     <ValidText className={displayValidText ? "valid" : ""}>&#42;아이디 또는 비밀번호가 잘못 입력 되었습니다.<br /><b>아이디</b>와 <b>비밀번호</b>를 정확히 입력해 주세요.</ValidText> 
     <BtnWrap>
-      <SignUpBtn onClick={validcheck}>Sign Up</SignUpBtn>
+      <SignUpBtn><Link to='/signup'>Sign Up</Link></SignUpBtn>
+      <SignInBtn onClick={validcheck}>Sign In</SignInBtn>
     </BtnWrap>
   </>
 }
