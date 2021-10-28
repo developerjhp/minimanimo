@@ -1,4 +1,4 @@
-import { useState } from 'react'; 
+// import { useState } from 'react'; 
 import styled from 'styled-components';
 
 const InputWrap = styled.div`
@@ -25,24 +25,24 @@ const InputWrap = styled.div`
   }
 `
 
-const Input = ({inputInfo, setInputInfo}) => {
+const Input = ({signInInputInfo, setSignInInputInfo}) => {
   // TODO: 서버에 signin 요청 후 잘못됐을때 ValidText 표출 및 input outline 붉은색으로 변경
 
   
   const InputuserInfo = (e) => {
     if (e.target.type === 'email') {
-      setInputInfo({ id: e.target.value, password: inputInfo.password })
+      setSignInInputInfo({ id: e.target.value, password: signInInputInfo.password })
     } else {
-      setInputInfo({ id: inputInfo.id, password: e.target.value })
+      setSignInInputInfo({ id: signInInputInfo.id, password: e.target.value })
     }
   }
 
   return (
     <InputWrap>
       <label for="clickid">Email</label>
-      <input id="clickid" type="email" placeholder="email" value={inputInfo.id} onChange={InputuserInfo} />
+      <input id="clickid" type="email" placeholder="email" value={signInInputInfo.id} onChange={InputuserInfo} />
       <label for="clickpwd">Password</label>
-      <input id="clickpwd" type="password" placeholder="password" value={inputInfo.password} onChange={InputuserInfo}/>
+      <input id="clickpwd" type="password" placeholder="password" value={signInInputInfo.password} onChange={InputuserInfo}/>
     </InputWrap>
   )
 }
