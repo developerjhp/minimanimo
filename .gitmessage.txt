@@ -16,7 +16,7 @@
 # == 16번째 line에 꼬릿말 작성 ==
 
 ################
-#  git Commit Type List
+# git Commit Type List
 # feat : 새로운 기능 추가
 # fix : 버그 수정
 # docs : 문서 수정

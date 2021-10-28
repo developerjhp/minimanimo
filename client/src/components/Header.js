@@ -50,7 +50,7 @@ export default function Header ({isLogedIn}) {
     </div>
     <div className="profile" onMouseLeave={hideDropdown} show={show}
       onMouseEnter={showDropdown}>
-      <div><Link to='/signin'>Sing In</Link>
+      <div><Link to='/signin'>Sign In</Link>
         {isLogedIn ? show ? 
         <ul>
           <li><Link to="/mypage">MyPage</Link></li>
