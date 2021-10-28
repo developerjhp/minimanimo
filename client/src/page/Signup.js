@@ -20,6 +20,7 @@ const SignupWrap = styled.div`
   background: #ffffff;
   position: relative;
 `
+
 const LogoImg = styled.img`
   width: 12vh;
   margin-bottom: 1.5rem;

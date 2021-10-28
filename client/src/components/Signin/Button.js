@@ -21,14 +21,20 @@ const SignInBtn = styled.button`
 const SignUpBtn = styled.button`
   flex: 1 0 0;
   margin-right: 0.5rem;
-  padding: 0.5rem 0;
+  padding: 0 0 0 0;
   font-weight: bold;
 
   &:hover {
     background-color: #4D2C21;
+    color: #fff;
   }
   > a:hover {
     color: #fff;
+  }
+  > a {
+    height: 40px;
+    padding-top: 8px;
+
   }
 `
 
