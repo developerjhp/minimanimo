@@ -6,12 +6,11 @@ import User from "../models/user.js";
 // @access Public
 const validateEmail = asyncHandler(async (req, res) => {
   // 이메일 유효성 확인
-  console.log(req.body); // 지우기
   const { email } = req.body;
 
   // 이메일 중복 검사
   const emailExists = await User.findOne({ email });
-  console.log(emailExists);
+
   if (emailExists) {
     res.status(401);
     throw new Error(`Email already exists`);

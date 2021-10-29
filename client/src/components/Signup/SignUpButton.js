@@ -29,58 +29,37 @@ const ValidText = styled.div`
   }
 `
 
-const Button = ({inputInfo, isLogedIn,isLogedInhandler}) => {
-  // signin 버튼을 클릭하면, 현재 가지고있는 inputInfo를 가지고 서버에게 axios post 요청
-  // TODO: inputInfo id, password 유효성검사해서 버튼 눌려도 axios 요청 안가고 바로 문구 표출
-  // TODO: input 유효성 검사 
-  // id: 이메일 형식이어야 함.
-  // password: 최소 8자 이상 20자 이하, 알파벳(대소문자 구분 x)과 숫자 및 특수문자(@$!%*#?&)는 하나 이상 포함해야 합니다
-  // id 유효, password 유효 => axios 요청 => 결과 반환
-  
-  /*첫번째 고려사항 
-  만약 일치하는 유저가 있고 비밀번호도 잘 적었다면 
-  isLogedIn상태를 true로 바꾸어줌 (이때 isLogedInhandler를 실행 시키면 false를 true로 변경) 
-  */
-
-  /*두번째 고려사항
-  만약 일치하는 유저가 없거나 비밀번호를 잘못 적는다면
-  isLogedIn상태는 그대로 true이며 에러메시지를 써줘야함.
-  */
-  const [displayValidText, setDisplayValidText] = useState(false);
-  
-  const validcheck = () => {
-    let idExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    let pwdExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
-    
-    if (idExp.test(inputInfo.id) && pwdExp.test(inputInfo.password)) {
-      try{
-        axios.post('http://localhost:3000/signin', {id : inputInfo.id , password : inputInfo.password})
-        .then((res) => {
-          // 로그인이 성공했으면, 
-          // 응답 확인하고 로그인 상태 변경 => 메인으로 보내주기
-        })
-        .then((res) => {
-          isLogedInhandler()
-          document.location.href = '/'
-        })
-      }
-      catch{
-        setDisplayValidText(true)
-        // state에 따라서 문구 표출 여부
-        // state 관리 .... 
-        //*아이디 또는 비밀번호가 잘못 입력 되었습니다.
-        // 아이디와 비밀번호를 정확히 입력해 주세요.
-      }
+const Button = ({ signUpInputInfo, signUpAllCheck }) => {
+  // const { email, password, nickname } = req.body;
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
     }
-    else {
-      setDisplayValidText(true)
+  };
+  // console.log(signUpInputInfo)
+  const signUpReqHandler = () => {
+    const {password, nickname} = signUpInputInfo
+    const payload = {email : signUpInputInfo.id , password, nickname}
+
+    if (signUpAllCheck) {
+      axios.post('/api/users', {
+      ...payload
+      }, config)
+      .then(res => {
+        // 이거 잘되면 로그인 화면으로 리다이렉트..?
+        // history replace로 뒤로가기 안되게 
+        document.location.href = '/signin'
+  
+      })
+      .catch(err => {
+        console.log(err)
+      })
     }
   }
   
   return <>
-    <ValidText className={displayValidText ? "valid" : ""}>&#42;아이디 또는 비밀번호가 잘못 입력 되었습니다.<br /><b>아이디</b>와 <b>비밀번호</b>를 정확히 입력해 주세요.</ValidText> 
     <BtnWrap>
-      <SignUpBtn onClick={validcheck}>Sign Up</SignUpBtn>
+      <SignUpBtn onClick={signUpReqHandler}>Sign Up</SignUpBtn>
     </BtnWrap>
   </>
 }
