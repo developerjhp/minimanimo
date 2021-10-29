@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json()); // body-parser
 
 app.get("/", (req, res) => {
-  res.send("API is running...");
+  res.send("Minimanimo API is running...");
 });
 
 // Route Handler Part
