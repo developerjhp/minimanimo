@@ -34,8 +34,8 @@ const PrevBtn = styled.div`
   `
 
 const Signup = ({isLogedIn, isLogedInhandler}) => {
-  const [signUpInputInfo, setSignUpInputInfo] = useState({ id: '', password: '', passwordCheck: '', nickname: '' });
-  const [signUpValid, setSignUpValid] = useState({id: false, password: false, passwordCheck: false, nickname: false});
+  const [signUpInputInfo, setSignUpInputInfo] = useState({ email: '', password: '', passwordCheck: '', nickname: '' });
+  const [signUpValid, setSignUpValid] = useState({ email: false, password: false, passwordCheck: false, nickname: false });
   const [signUpAllCheck, setSignUpAllCheck] = useState(false); // useEffect로 변경
   // useEffect로 signUpValid 감시 => 다 트루면 변경 => 버튼으로 내려주기
 
@@ -56,7 +56,7 @@ const Signup = ({isLogedIn, isLogedInhandler}) => {
     <PrevBtn><Link to='/signin'><FaArrowLeft/></Link></PrevBtn>
       <LogoImg src={Logo} alt="Logo" />
       <SignUpInput signUpInputInfo={signUpInputInfo} setSignUpInputInfo={setSignUpInputInfo} signUpValid={signUpValid} setSignUpValid={setSignUpValid} />
-      <SignUpButton signUpInputInfo={signUpInputInfo} signUpAllCheck={signUpAllCheck}/>
+      <SignUpButton signUpInputInfo={signUpInputInfo} signUpAllCheck={signUpAllCheck} />
     </SignupWrap>
   </SignupContainer>
 }

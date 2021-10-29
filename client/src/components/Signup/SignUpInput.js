@@ -28,7 +28,7 @@ const InputWrap = styled.div`
                 //우리가 입력한 값 (보낼값)               //개별 유효성 체크(boolean)
 const Input = ({signUpInputInfo, setSignUpInputInfo, signUpValid, setSignUpValid}) => {
   
-  const idExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const emailExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const pwdExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
   const nicknameExp = /^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{1,10}$/;
 
@@ -42,8 +42,8 @@ const Input = ({signUpInputInfo, setSignUpInputInfo, signUpValid, setSignUpValid
 
   useEffect(() => {
     //email 검증 useEffect
-    if (idExp.test(signUpInputInfo.id)) {
-      axios.post('/api/validate/email', { email : signUpInputInfo.id }, config)
+    if (emailExp.test(signUpInputInfo.id)) {
+      axios.post('/api/validate/email', { email : signUpInputInfo.email }, config)
         .then(res => { 
           //가입가능한 이메일이니 이것도 문구하나 띄워야됨
           console.log(res) })
@@ -66,12 +66,12 @@ const Input = ({signUpInputInfo, setSignUpInputInfo, signUpValid, setSignUpValid
 
   }, [signUpInputInfo])
   
-  const validId = (e) => {
-    setSignUpInputInfo({ ...signUpInputInfo, id: e.target.value })
-    if (!idExp.test(signUpInputInfo.id))
-      setSignUpValid({ ...signUpValid, id: false })
+  const validEmail = (e) => {
+    setSignUpInputInfo({ ...signUpInputInfo, email: e.target.value })
+    if (!emailExp.test(signUpInputInfo.email))
+      setSignUpValid({ ...signUpValid, email: false })
     else {
-      setSignUpValid({ ...signUpValid, id: true })
+      setSignUpValid({ ...signUpValid, email: true })
     }
   }
 
@@ -108,8 +108,8 @@ const Input = ({signUpInputInfo, setSignUpInputInfo, signUpValid, setSignUpValid
     <InputWrap>
       {/* ADVENCED: 서버랑 통신해서 받아온걸 업데이트 해줄 상태 생성 => 결과에 따라 문구 표출 */}
       <label for="clickemail">Email</label>
-      <input id="clickemail" type="email" placeholder="email" value={signUpInputInfo.id} onChange={validId}/>
-      { signUpInputInfo.id === '' || signUpValid.id ?  null : <span>올바른 이메일 형식이 아닙니다.</span> }
+      <input id="clickemail" type="email" placeholder="email" value={signUpInputInfo.email} onChange={validEmail}/>
+      { signUpInputInfo.email === '' || signUpValid.email ?  null : <span>올바른 이메일 형식이 아닙니다.</span> }
 
       <label for="clickpwd2">Password</label>
       <input id="clickpwd2" type="password" placeholder="password" value={signUpInputInfo.password} onChange={validPassword}/>

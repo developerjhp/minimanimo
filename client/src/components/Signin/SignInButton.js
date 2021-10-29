@@ -1,7 +1,8 @@
-import { useState } from 'react'; 
+import { useState, useEffect } from 'react'; 
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useHistory } from 'react-router';
 
 const BtnWrap = styled.div`
   margin-top: 1.5rem;
@@ -49,7 +50,7 @@ const ValidText = styled.div`
   }
 `
 
-const Button = ({signInInputInfo, isLogedIn, isLogedInhandler}) => {
+const Button = ({signInInputInfo, setSignInInputInfo, isLogedIn, isLogedInhandler}) => {
   // signin 버튼을 클릭하면, 현재 가지고있는 inputInfo를 가지고 서버에게 axios post 요청
   // TODO: inputInfo id, password 유효성검사해서 버튼 눌려도 axios 요청 안가고 바로 문구 표출
   // TODO: input 유효성 검사 
@@ -66,31 +67,27 @@ const Button = ({signInInputInfo, isLogedIn, isLogedInhandler}) => {
   만약 일치하는 유저가 없거나 비밀번호를 잘못 적는다면
   isLogedIn상태는 그대로 true이며 에러메시지를 써줘야함.
   */
+  useEffect(() => {
+    console.log(isLogedIn)
+  }, [isLogedIn])
+
   const [displayValidText, setDisplayValidText] = useState(false);
-  
+  const history = useHistory()
+
   const validcheck = () => {
     let idExp = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]+$/;
     let pwdExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
     
-    if (idExp.test(signInInputInfo.id) && pwdExp.test(signInInputInfo.password)) {
-      try{
-        axios.post('http://localhost:3000/signin', {id : signInInputInfo.id , password : signInInputInfo.password})
-        .then((res) => {
-          // 로그인이 성공했으면, 
-          // 응답 확인하고 로그인 상태 변경 => 메인으로 보내주기
-        })
+    if (idExp.test(signInInputInfo.email) && pwdExp.test(signInInputInfo.password)) {
+        axios.post('/api/users/login', {email : signInInputInfo.email , password : signInInputInfo.password})
         .then((res) => {
           isLogedInhandler()
-          document.location.href = '/'
+          setSignInInputInfo({ email: '', password: '' })
+          history.replace('/')  // token 
+        }).catch(err => {
+          console.log(err)
+          setDisplayValidText(true)
         })
-      }
-      catch{
-        setDisplayValidText(true)
-        // state에 따라서 문구 표출 여부
-        // state 관리 .... 
-        //*아이디 또는 비밀번호가 잘못 입력 되었습니다.
-        // 아이디와 비밀번호를 정확히 입력해 주세요.
-      }
     }
     else {
       setDisplayValidText(true)
