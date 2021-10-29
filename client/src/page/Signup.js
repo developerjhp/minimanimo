@@ -34,87 +34,31 @@ const PrevBtn = styled.div`
   `
 
 const Signup = ({isLogedIn, isLogedInhandler}) => {
-  const [signUpInputInfo, setSignUpInputInfo] = useState({ id: '', password: '', nickname: '' });
+  const [signUpInputInfo, setSignUpInputInfo] = useState({ id: '', password: '', passwordCheck: '', nickname: '' });
   const [signUpValid, setSignUpValid] = useState({id: false, password: false, passwordCheck: false, nickname: false});
   const [signUpAllCheck, setSignUpAllCheck] = useState(false); // useEffect로 변경
   // useEffect로 signUpValid 감시 => 다 트루면 변경 => 버튼으로 내려주기
+
+  useEffect(() => {
+    console.log(Object.entries(signUpValid).flat().every(el=> el))
+    //signUpvalid가 변경될떄마다, 체크하고 만약 signUpvalid의 모든 value값이 true가 될 경우 signUpAllCheck를 트루를 바꿔야됨. 
+    // if(Object.entries(signUpValid).every()) {  // [[],[],[],[]]
+    if(Object.entries(signUpValid).flat().every(el=> el)){
+      setSignUpAllCheck(true)
+    }
+    else {
+      setSignUpAllCheck(false)
+    }
+  },[signUpValid])
   
   return <SignupContainer>
     <SignupWrap>
     <PrevBtn><Link to='/signin'><FaArrowLeft/></Link></PrevBtn>
       <LogoImg src={Logo} alt="Logo" />
       <SignUpInput signUpInputInfo={signUpInputInfo} setSignUpInputInfo={setSignUpInputInfo} signUpValid={signUpValid} setSignUpValid={setSignUpValid} />
-      <SignUpButton signUpInputInfo={signUpInputInfo} isLogedIn={isLogedIn} isLogedInhandler={isLogedInhandler}/>
+      <SignUpButton signUpInputInfo={signUpInputInfo} signUpAllCheck={signUpAllCheck}/>
     </SignupWrap>
   </SignupContainer>
 }
 
-  //  const [Valid, Idvalid] = useState(false);
-  // const strongPassword = (str) = {
-  //   regExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
-  // 최소 8자 이상하면서, 알파벳과 숫자 및 특수문자(@$!%*#?&) 는 하나 이상 포함해야 합니다
-  // }
-  // const checkPassword = (e) => {
-  //   //  8 ~ 10자 영문, 숫자 조합
-  //   let regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,10}$/
-  //   // 형식에 맞는 경우 true 리턴
-  //   if (regExp.test(e.target.value))
-  //     setValid = false;
-  //   else
-  //     setValid = true;
-  // }
-  //onBlur={checkPassword}
-  
-  // var regExp = /^0-9a-zA-Z@0-9a-zA-Z.[a-zA-Z]{2,3}$/i;  이메일 reg
-  // var regExp = /^[a-z0-9_]{4,20}$/; // 비밀번호
-  // var regExp = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/; 비밀번호 체크
-
 export default Signup;
-
-// import { useState } from 'react'; 
-// import styled from 'styled-components';
-// import { Link } from 'react-router-dom';
-
-// const BtnWrap = styled.div`
-//   margin-top: 1.5rem;
-//   display: flex;
-// `
-// const SignInBtn = styled.button`
-//   flex: 1 0 0;
-//   margin-left: 0.5rem;
-//   padding: 0.5rem 0;
-//   font-weight: bold;
-//   color: #fff;
-//   background-color: #387099;
-  
-//   &:hover {
-//     background-color: #EDC51E;
-//   }
-//   >a:hover {
-//     color: #fff;
-//   }
-// `
-// const SignUpBtn = styled.button`
-//   flex: 1 0 0;
-//   margin-right: 0.5rem;
-//   padding: 0.5rem 0;
-
-//   &:hover {
-//     color: #ffffff;
-//     background-color: #4D2C21;
-//   }
-// `
-
-// const Button = ({inputInfo, isLogedIn,setIsLogedIn, isLogedInhandler}) => {
-//   //버튼을 클릭하면, 현재 가지고있는 inputInfo를 가지고 서버에게 axios post 요청을 함.
-//   //
-
-//   return (
-//     <BtnWrap>
-//       <SignUpBtn><Link to='/signup'>Sign Up</Link></SignUpBtn>
-//       <SignInBtn>Sign In</SignInBtn>
-//     </BtnWrap>
-//   )
-// }
-
-// export default Button;
