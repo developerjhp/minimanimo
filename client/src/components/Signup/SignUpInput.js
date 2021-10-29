@@ -37,7 +37,7 @@ const Input = ({signUpInputInfo, setSignUpInputInfo, signUpValid, setSignUpValid
   };
 
   const vaidId = (e) => {
-    let idExp = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]+$/;
+    let idExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     setSignUpInputInfo({...signUpInputInfo, id: e.target.value})
     
