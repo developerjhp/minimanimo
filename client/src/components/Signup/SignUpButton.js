@@ -49,7 +49,7 @@ const Button = ({inputInfo, isLogedIn,isLogedInhandler}) => {
   const [displayValidText, setDisplayValidText] = useState(false);
   
   const validcheck = () => {
-    let idExp = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]+$/;
+    let idExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let pwdExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
     
     if (idExp.test(inputInfo.id) && pwdExp.test(inputInfo.password)) {

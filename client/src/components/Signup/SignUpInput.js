@@ -1,5 +1,6 @@
 import { useState } from 'react'; 
 import styled from 'styled-components';
+import axios from 'axios';
 
 const InputWrap = styled.div`
   display: flex;
@@ -29,15 +30,25 @@ const Input = ({signUpInputInfo, setSignUpInputInfo, signUpValid, setSignUpValid
   
   // TODO: 서버에 signin 요청 후 잘못됐을때 ValidText 표출 및 input outline 붉은색으로 변경
   // const [signUpValid, setSignUpValid] = useState({id: false, password: false, passwordCheck: false, nickname: false});  참고용 
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
   const vaidId = (e) => {
-    let idExp = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]+$/;
+    let idExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     setSignUpInputInfo({...signUpInputInfo, id: e.target.value})
     
     if(!idExp.test(signUpInputInfo.id))
       setSignUpValid({...signUpValid, id : false})
-    else
+    else {
       setSignUpValid({...signUpValid, id : true})
+      axios.post('/api/validate/email', {
+        eamil : signUpInputInfo.id
+      }, config)
+    }
   }
 
 
