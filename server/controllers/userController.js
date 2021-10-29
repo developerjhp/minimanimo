@@ -25,7 +25,6 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
-      token: generateToken(user._id),
     });
   } else {
     // 필수 요구사항이 빈다면

@@ -11,12 +11,12 @@ const validateEmail = asyncHandler(async (req, res) => {
 
   // 이메일 중복 검사
   const emailExists = await User.findOne({ email });
-
+  console.log(emailExists);
   if (emailExists) {
     res.status(401);
     throw new Error(`Email already exists`);
   }
-  res.status(200).send("ok");
+  res.status(200).send({ message: "ok" });
 });
 
 // @desc   Validate a nickname
@@ -34,7 +34,7 @@ const validateNickname = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error(`Nickname already exists`);
   }
-  res.status(200).send("ok");
+  res.status(200).send({ message: "ok" });
 });
 
 export { validateEmail, validateNickname };
