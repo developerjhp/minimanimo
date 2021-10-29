@@ -34,7 +34,8 @@ const StyledHeader = styled.header`
   }
 `
 
-export default function Header ({isLogedIn}) {
+export default function Header ({ isLogedIn }) {
+
   const [show, setShow] = useState(false);
   const showDropdown = () => {
     setShow(!show);
@@ -51,12 +52,12 @@ export default function Header ({isLogedIn}) {
     <div className="profile" onMouseLeave={hideDropdown} show={show}
       onMouseEnter={showDropdown}>
       <div><Link to='/signin'>Sign In</Link>
-        {isLogedIn ? show ? 
+        {isLogedIn && show ? 
         <ul>
           <li><Link to="/mypage">MyPage</Link></li>
           <li><Link to='/'>LogOut</Link></li>
         </ul>
-        : null : null}
+        : null }
       </div>
     </div>
   </StyledHeader>

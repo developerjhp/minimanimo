@@ -31,16 +31,16 @@ const Input = ({signInInputInfo, setSignInInputInfo}) => {
   
   const InputuserInfo = (e) => {
     if (e.target.type === 'email') {
-      setSignInInputInfo({ id: e.target.value, password: signInInputInfo.password })
+      setSignInInputInfo({ email: e.target.value, password: signInInputInfo.password })
     } else {
-      setSignInInputInfo({ id: signInInputInfo.id, password: e.target.value })
+      setSignInInputInfo({ email: signInInputInfo.email, password: e.target.value })
     }
   }
 
   return (
     <InputWrap>
       <label for="clickid">Email</label>
-      <input id="clickid" type="email" placeholder="email" value={signInInputInfo.id} onChange={InputuserInfo} />
+      <input id="clickid" type="email" placeholder="email" value={signInInputInfo.email} onChange={InputuserInfo} />
       <label for="clickpwd">Password</label>
       <input id="clickpwd" type="password" placeholder="password" value={signInInputInfo.password} onChange={InputuserInfo}/>
     </InputWrap>

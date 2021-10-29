@@ -39,7 +39,7 @@ const Button = ({ signUpInputInfo, signUpAllCheck }) => {
   // console.log(signUpInputInfo)
   const signUpReqHandler = () => {
     const {password, nickname} = signUpInputInfo
-    const payload = {email : signUpInputInfo.id , password, nickname}
+    const payload = { email : signUpInputInfo.email , password, nickname }
 
     if (signUpAllCheck) {
       axios.post('/api/users', {
@@ -49,7 +49,6 @@ const Button = ({ signUpInputInfo, signUpAllCheck }) => {
         // 이거 잘되면 로그인 화면으로 리다이렉트..?
         // history replace로 뒤로가기 안되게 
         document.location.href = '/signin'
-  
       })
       .catch(err => {
         console.log(err)

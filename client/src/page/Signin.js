@@ -32,14 +32,14 @@ const PrevBtn = styled.div`
 `
 
 const Signin = ({isLogedIn,  isLogedInhandler}) => {
-  const [signInInputInfo, setSignInInputInfo] = useState({ id: '', password: '' });
+  const [signInInputInfo, setSignInInputInfo] = useState({ email: '', password: '' });
   
   return <SigninContainer>
     <SigninWrap>
       <PrevBtn><Link to='/'><FaArrowLeft/></Link></PrevBtn>
       <LogoImg src={Logo} alt="Logo" />
       <SignInInput signInInputInfo={signInInputInfo} setSignInInputInfo={setSignInInputInfo}/>
-      <SignInButton signInInputInfo={signInInputInfo} isLogedIn={isLogedIn}  isLogedInhandler={isLogedInhandler}/>
+      <SignInButton signInInputInfo={signInInputInfo} isLogedIn={isLogedIn}  isLogedInhandler={isLogedInhandler} setSignInInputInfo={setSignInInputInfo}/>
     </SigninWrap>
   </SigninContainer>
 }
