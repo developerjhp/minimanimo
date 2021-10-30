@@ -1,12 +1,20 @@
-import asyncHandler from "express-async-handler";
-import Post from "../models/post.js";
+import asyncHandler from 'express-async-handler';
+import Post from '../models/post.js';
 
 // @desc   Fetch all posts
 // @route  GET /api/posts
 // @access Public
 const getPosts = asyncHandler(async (req, res) => {
   // 전체 게시물 요청
-  const posts = await Post.find({});
+  const posts = Post.find({})
+    .populate('user')
+    .exec((err, post) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(user.post.content);
+      }
+    });
   res.status(200).json(posts);
 });
 
@@ -21,7 +29,7 @@ const addPost = asyncHandler(async (req, res) => {
 
   if (!content) {
     res.status(400);
-    throw new Error("There is no post");
+    throw new Error('There is no post');
     return;
   } else {
     const post = new Post({
@@ -37,19 +45,23 @@ const addPost = asyncHandler(async (req, res) => {
 // @desc   update user post
 // @route  PUT /api/posts/edit
 // @access Private
-const updatePost = asyncHandler(async (req, res) => {
+const updateMyPost = asyncHandler(async (req, res) => {
   // 게시물 수정 요청
-  const user = await User.findById(req.user._id);
+  const post = await Post.findById(req.user._id);
 
-  if (user) {
+  if (post) {
+    post.content = req.body.content || post.content;
+
+    const updatedPost = await post.save();
+
     res.json({
-      _id: user._id,
-      nickname: user.nickname,
+      _id: updatedPost._id,
+      content: updatedPost.content,
       email: user.email,
     });
   } else {
     res.status(404);
-    throw new Error("User not found");
+    throw new Error('User not found');
   }
 });
 
@@ -78,8 +90,8 @@ const getMyPost = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(404);
-    throw new Error("User not found");
+    throw new Error('User not found');
   }
 });
 
-export { getPosts, addPost, updatePost, getMyPost };
+export { getPosts, addPost, updateMyPost, getMyPost };
