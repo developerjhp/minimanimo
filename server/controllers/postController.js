@@ -4,18 +4,13 @@ import Post from '../models/post.js';
 // @desc   Fetch all posts
 // @route  GET /api/posts
 // @access Public
-const getPosts = asyncHandler(async (req, res) => {
+const getPosts = asyncHandler((req, res) => {
   // 전체 게시물 요청
-  const posts = Post.find({})
+  Post.find({}, (err, records) => {
+    if (records) res.status(200).json(records);
+  })
     .populate('user')
-    .exec((err, post) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log(user.post.content);
-      }
-    });
-  res.status(200).json(posts);
+    .exec();
 });
 
 // @desc   Create new post
