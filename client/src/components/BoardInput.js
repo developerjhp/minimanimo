@@ -60,10 +60,11 @@ export default function BoardInput({ isLogedIn }) {
     setNewInputValue(e.target.value)
   }
 
-  const newInputInfo = JSON.parse(localStorage.getItem('userInfo')).token
+  const newInputInfo = JSON.parse(localStorage.getItem('userInfo'))
+
   const config = {
     headers: {
-      Authorization: `Bearer ${newInputInfo}`,
+      'Authorization': `Bearer ${newInputInfo.token}`,
       'Content-Type': 'application/json',
     },
   };
@@ -71,7 +72,7 @@ export default function BoardInput({ isLogedIn }) {
   const submitBtnHandler = () => {
     //axios post 요청 (_id(localstorage userInfo._id)), 토큰(header), newInputValue 전송)
     //서버에서 외부에서 못들어오도록 막아서 이거 할때 토큰도 같이 보내야 함.
-    axios.post('/api/posts/new', { content: newInputValue, }, config)
+    axios.post('/api/posts/new', { content: newInputValue, user: newInputInfo }, config)
       .then(res => {
         console.log("잘되었어요")
       }).catch(err => {

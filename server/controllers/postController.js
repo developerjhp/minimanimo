@@ -1,5 +1,5 @@
 import asyncHandler from "express-async-handler";
-import Post from "../models/post";
+import Post from "../models/post.js";
 
 // @desc   Fetch all posts
 // @route  GET /api/posts
@@ -16,8 +16,8 @@ const getPosts = asyncHandler(async (req, res) => {
 const addPost = asyncHandler(async (req, res) => {
   // 로그인 요청
   // req.body로 들어온 회원정보 이용.
-
-  const { content } = req.body;
+  console.log(req.body)
+  const { content, user } = req.body;
 
   if (!content) {
     res.status(400);
@@ -25,7 +25,7 @@ const addPost = asyncHandler(async (req, res) => {
     return;
   } else {
     const post = new Post({
-      user: req.user._id,
+      user: user._id,
       content,
     });
 
