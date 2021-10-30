@@ -7,7 +7,7 @@ import generateToken from "./utils/generateToken.js";
 // @access Public
 const registerUser = asyncHandler(async (req, res) => {
   // 회원가입 요청
-  console.log(req.body)
+  console.log(req.body);
 
   const { email, password, nickname } = req.body;
 
@@ -26,6 +26,7 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      image: `/images/users/${Math.floor(Math.random() * 5) + 1}.jpeg`,
     });
   } else {
     // 필수 요구사항이 빈다면
@@ -50,6 +51,7 @@ const authUser = asyncHandler(async (req, res) => {
       _id: user._id,
       nickname: user.nickname,
       email: user.email,
+      image: user.image,
       token: generateToken(user._id),
     });
   } else {
@@ -71,6 +73,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
       _id: user._id,
       nickname: user.nickname,
       email: user.email,
+      image: user.image,
     });
   } else {
     res.status(404);
@@ -99,6 +102,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       _id: updatedUser._id,
       nickname: updatedUser.nickname,
       email: updatedUser.email,
+      image: user.image,
       token: generateToken(updatedUser._id),
     });
   } else {
