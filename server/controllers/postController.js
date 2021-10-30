@@ -4,13 +4,13 @@ import Post from '../models/post.js';
 // @desc   Fetch all posts
 // @route  GET /api/posts
 // @access Public
-const getPosts = asyncHandler((req, res) => {
+const getPosts = asyncHandler(async (req, res) => {
   // 전체 게시물 요청
-  Post.find({}, (err, records) => {
-    if (records) res.status(200).json(records);
-  })
-    .populate('user')
+  const posts = await Post.find({})
+    .populate('user', ['nickname', 'image'])
+    .sort({ createdAt: 1 })
     .exec();
+  if (posts) res.status(200).json(posts);
 });
 
 // @desc   Create new post
@@ -37,12 +37,12 @@ const addPost = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc   update user post
+// @desc   update own post
 // @route  PUT /api/posts/edit
 // @access Private
 const updateMyPost = asyncHandler(async (req, res) => {
-  // 게시물 수정 요청
-  const post = await Post.findById(req.user._id);
+  // 본인 게시물 수정 요청
+  const post = await Post.findById(req.body._id);
 
   if (post) {
     post.content = req.body.content || post.content;
@@ -51,42 +51,29 @@ const updateMyPost = asyncHandler(async (req, res) => {
 
     res.json({
       _id: updatedPost._id,
+      user: updatedPost.user,
       content: updatedPost.content,
-      email: user.email,
     });
   } else {
     res.status(404);
-    throw new Error('User not found');
+    throw new Error('Post not found');
   }
 });
 
 // @desc   Get user posts
 // @route  GET /api/posts/profile
 // @access Private
-const getMyPost = asyncHandler(async (req, res) => {
-  // 회원 정보 수정 요청
-  // 수정 요청으로 들어온 데이터로 변경해 저장한다.
+const getMyPosts = asyncHandler(async (req, res) => {
+  // 본인 게시물 전체 요청
+  const posts = await Post.find({ user: req.user._id });
 
-  const user = await User.findById(req.user._id);
-
-  if (user) {
-    user.nickname = req.body.nickname || user.nickname;
-    if (req.body.password) {
-      user.password = req.body.password;
-    }
-
-    const updatedUser = await user.save();
-
-    res.json({
-      _id: updatedUser._id,
-      nickname: updatedUser.nickname,
-      email: updatedUser.email,
-      token: generateToken(updatedUser._id),
-    });
+  if (posts.length > 0) {
+    const ownPosts = await posts.save();
+    res.status(200).json(ownPosts);
   } else {
     res.status(404);
-    throw new Error('User not found');
+    throw new Error('Posts not found');
   }
 });
 
-export { getPosts, addPost, updateMyPost, getMyPost };
+export { getPosts, addPost, updateMyPost, getMyPosts };
