@@ -1,19 +1,19 @@
-import express from "express";
+import express from 'express';
 import {
   getPosts,
   addPost,
-  updatePost,
+  updateMyPost,
   getMyPost,
-} from "../controllers/postController.js";
-import { protect } from "../middleware/auth.js"; // for private routes
+} from '../controllers/postController.js';
+import { protect } from '../middleware/auth.js'; // for private routes
 
 const router = express.Router();
 
 // endpoint => /api/posts
-router.route("/").get(getPosts);
-router.route("/new").post(protect, addPost); // 로그인한 유저만 요청 가능
-router.route("/edit").put(updatePost);
+router.route('/').get(getPosts);
+router.route('/new').post(protect, addPost);
+router.route('/edit').put(protect, updateMyPost);
 
-router.route("/profile").get(protect, getMyPost); // 내가 쓴 글 정보 요청
+router.route('/profile').get(protect, getMyPost); // 마이페이지 용
 
 export default router;
