@@ -15,17 +15,29 @@ const StyledHeader = styled.header`
   position: relative;
 
   > .profile {
-    width: 10vh;
     height: 4vh;
     line-height: 4vh;
   }
   img {
     height: 8vh;
   }
+  .userinfo {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  .profile_img {
+    margin-right: 1rem;
+    height: 5vh;
+    border: 1px solid #eee;
+    border-radius: 50%;
+  }
 
   ul {
+    font-size: 1rem;
+    font-weight: normal;
     background: rgba(255, 255, 255, 0.8);
   }
+
   li {
     width: 10vh;
     text-align: center;
@@ -66,7 +78,14 @@ export default function Header({ isLogedIn, isLogedInhandler }) {
     </div>
     <div className="profile" onMouseLeave={hideDropdown} show={show}
       onMouseEnter={showDropdown}>
-      <div>{isLogedIn ? JSON.parse(localStorage.getItem('userInfo')).nickname : <Link to='/signin'>Sign in</Link>}
+      <div className="userinfo">
+        {isLogedIn
+          ? <div>
+              <img className="profile_img" src={isLogedIn ? JSON.parse(localStorage.getItem('userInfo')).image : '/images/users/1.jpeg'} alt="프로필 이미지" />
+              {JSON.parse(localStorage.getItem('userInfo')).nickname}
+            </div>
+          : <Link to='/signin'>Sign in</Link>
+        }
         {isLogedIn && show ?
           <ul>
             <li><Link to="/mypage">MyPage</Link></li>
