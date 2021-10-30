@@ -19,14 +19,19 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error(`User already exists`);
   }
 
-  const user = await User.create({ email, password, nickname });
+  const user = await User.create({
+    email,
+    password,
+    nickname,
+    image: `/images/users/${Math.floor(Math.random() * 5) + 1}.jpeg`,
+  });
 
   if (user) {
     res.status(201).json({
       _id: user._id,
       name: user.name,
       email: user.email,
-      image: `/images/users/${Math.floor(Math.random() * 5) + 1}.jpeg`,
+      image: user.image,
     });
   } else {
     // 필수 요구사항이 빈다면
