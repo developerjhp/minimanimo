@@ -30,7 +30,7 @@ export default function BoardList({ isLogedIn }) {
       .get('/api/posts', config)
       .then((res) => {
         //res.data에 들어가 있음,
-        console.log(res);
+        console.log(res.data);
         // setBoardListData(res.data)
       })
       .catch((err) => {

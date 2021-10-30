@@ -1,6 +1,6 @@
-import asyncHandler from "express-async-handler";
-import User from "../models/user.js";
-import generateToken from "./utils/generateToken.js";
+import asyncHandler from 'express-async-handler';
+import User from '../models/user.js';
+import generateToken from './utils/generateToken.js';
 
 // @desc   Register a new user
 // @route  POST /api/users
@@ -35,8 +35,8 @@ const registerUser = asyncHandler(async (req, res) => {
     });
   } else {
     // 필수 요구사항이 빈다면
-    res.status(404);
-    throw new Error("required element should be fullfilled");
+    res.status(400);
+    throw new Error('required element should be fullfilled');
   }
 });
 
@@ -61,7 +61,7 @@ const authUser = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(401);
-    throw new Error("Invalid email or password");
+    throw new Error('Invalid email or password');
   }
 });
 
@@ -82,7 +82,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(404);
-    throw new Error("User not found");
+    throw new Error('User not found');
   }
 });
 
@@ -107,12 +107,12 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       _id: updatedUser._id,
       nickname: updatedUser.nickname,
       email: updatedUser.email,
-      image: user.image,
+      image: updatedUser.image,
       token: generateToken(updatedUser._id),
     });
   } else {
     res.status(404);
-    throw new Error("User not found");
+    throw new Error('User not found');
   }
 });
 

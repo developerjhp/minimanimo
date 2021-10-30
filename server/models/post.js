@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const postSchema = mongoose.Schema(
   {
@@ -6,7 +6,7 @@ const postSchema = mongoose.Schema(
       // 어느 유저의 글인지 연결
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "User",
+      ref: 'User',
     },
     content: {
       type: String,
@@ -14,10 +14,10 @@ const postSchema = mongoose.Schema(
     },
   },
   {
-    timeStamps: true,
+    timestamps: true,
   }
 );
 
-const Post = mongoose.model("Post", postSchema);
+const Post = mongoose.model('Post', postSchema);
 
 export default Post;
