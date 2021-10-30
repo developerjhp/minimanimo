@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import styled from 'styled-components'
 import Symbol from '../assets/images/Symbol.svg';
+import { useHistory } from 'react-router-dom';
 
 const StyledHeader = styled.header`
   height: 10vh;
@@ -34,7 +35,9 @@ const StyledHeader = styled.header`
   }
 `
 
-export default function Header ({ isLogedIn }) {
+export default function Header({ isLogedIn, isLogedInhandler }) {
+
+  const history = useHistory();
 
   const [show, setShow] = useState(false);
   const showDropdown = () => {
@@ -43,6 +46,15 @@ export default function Header ({ isLogedIn }) {
   const hideDropdown = () => {
     setShow(false);
   }
+
+  const logOutHandler = () => {
+    // 로그아웃 -> localStorage 삭제
+    localStorage.removeItem('userInfo');
+    isLogedInhandler();
+    history.replace('/')
+    alert("로그아웃이 완료되었습니다.")
+  }
+
   // 프로필 이미지(api 랜덤이미지), 닉네임
   // hover => drop down 기능 구현
   return <StyledHeader className="header">
@@ -51,13 +63,13 @@ export default function Header ({ isLogedIn }) {
     </div>
     <div className="profile" onMouseLeave={hideDropdown} show={show}
       onMouseEnter={showDropdown}>
-      <div><Link to='/signin'>Sign In</Link>
-        {isLogedIn && show ? 
-        <ul>
-          <li><Link to="/mypage">MyPage</Link></li>
-          <li><Link to='/'>LogOut</Link></li>
-        </ul>
-        : null }
+      <div>{isLogedIn ? JSON.parse(localStorage.getItem('userInfo')).nickname : <Link to='/signin'>Sign in</Link>}
+        {isLogedIn && show ?
+          <ul>
+            <li><Link to="/mypage">MyPage</Link></li>
+            <li><Link to='/' onClick={logOutHandler}>LogOut</Link></li>
+          </ul>
+          : null}
       </div>
     </div>
   </StyledHeader>

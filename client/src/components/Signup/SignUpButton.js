@@ -1,5 +1,6 @@
-import { useState } from 'react'; 
+import { useState } from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -37,25 +38,27 @@ const Button = ({ signUpInputInfo, signUpAllCheck }) => {
     }
   };
   // console.log(signUpInputInfo)
+
+  const history = useHistory();
+
   const signUpReqHandler = () => {
-    const {password, nickname} = signUpInputInfo
-    const payload = { email : signUpInputInfo.email , password, nickname }
+    const { password, nickname } = signUpInputInfo
+    const payload = { email: signUpInputInfo.email, password, nickname }
 
     if (signUpAllCheck) {
       axios.post('/api/users', {
-      ...payload
+        ...payload
       }, config)
-      .then(res => {
-        // 이거 잘되면 로그인 화면으로 리다이렉트..?
-        // history replace로 뒤로가기 안되게 
-        document.location.href = '/signin'
-      })
-      .catch(err => {
-        console.log(err)
-      })
+        .then(res => {
+          // 회원가입 후 로그인 페이지로 갱신
+          history.replace('/signin')
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
-  
+
   return <>
     <BtnWrap>
       <SignUpBtn onClick={signUpReqHandler}>Sign Up</SignUpBtn>
