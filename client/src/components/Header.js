@@ -23,6 +23,9 @@ const StyledHeader = styled.header`
     height: 8vh;
   }
 
+  ul {
+    background: rgba(255, 255, 255, 0.8);
+  }
   li {
     width: 10vh;
     text-align: center;
