@@ -11,7 +11,6 @@ const App = () => {
   //로그인 상태관리 여기서 하기
   const [isLogedIn, setIsLogedIn] = useState(false); // false인데 우측상단 드랍다운 메뉴 안떠서 true로 변경함
   
-  //
   // const [userObj, setUserObj] = useState(null)
 
   useEffect(() => {

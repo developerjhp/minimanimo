@@ -2,11 +2,11 @@ import asyncHandler from 'express-async-handler';
 import Post from '../models/post.js';
 import moment from 'moment';
 import moment2 from 'moment-timezone';
+moment2.tz.setDefault('Asia/Seoul');
 
 // @desc   Fetch all posts
 // @route  GET /api/posts
 // @access Public
-moment2.tz.setDefault('Asia/Seoul');
 const getPosts = asyncHandler(async (req, res) => {
   // 전체 게시물 요청
   const posts = await Post.find({})
@@ -78,15 +78,18 @@ const deleteMyPost = asyncHandler(async (req, res) => {
 });
 
 // @desc   Get user posts
-// @route  GET /api/posts/profile
+// @route  GET /api/posts/mine
 // @access Private
 const getMyPosts = asyncHandler(async (req, res) => {
   // 본인 게시물 전체 요청
-  const posts = await Post.find({ user: req.user._id });
-
-  if (posts.length > 0) {
-    const ownPosts = await posts.save();
-    res.status(200).json(ownPosts);
+  const posts = await Post.find({ user: req.user._id })
+    .populate('user', ['nickname', 'image'])
+    .sort({ createdAt: 1 })
+    .exec();
+  if (posts) {
+    res.status(201).json(posts.map(el => {
+      return {...el._doc, createdAt : moment(el.createdAt).format(), updatedAt: moment(el.updatedAt).format()}
+    }));    
   } else {
     res.status(404);
     throw new Error('Posts not found');

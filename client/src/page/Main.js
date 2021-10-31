@@ -7,7 +7,6 @@ import axios from 'axios';
 const Main = ({ isLogedIn, isLogedInhandler }) => {
   const [boardListData, setBoardListData] = useState([]);
   
-  
   useEffect(() => {
     const config = {
       headers: {
@@ -17,7 +16,7 @@ const Main = ({ isLogedIn, isLogedInhandler }) => {
     axios
       .get('/api/posts', config)
       .then((res) => {
-        setBoardListData([...res.data].reverse())
+        setBoardListData([...res.data])
       })
       .catch((err) => {
         console.log(err);
