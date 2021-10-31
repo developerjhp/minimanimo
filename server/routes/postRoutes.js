@@ -16,6 +16,6 @@ router.route('/new').post(protect, addPost);
 router.route('/edit').put(protect, updateMyPost);
 router.route('/delete').delete(protect, deleteMyPost);
 
-router.route('/profile').get(protect, getMyPosts); // 마이페이지 용
+router.route('/mine').get(protect, getMyPosts); // 마이페이지 용
 
 export default router;

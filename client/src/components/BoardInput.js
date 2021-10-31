@@ -109,7 +109,7 @@ export default function BoardInput({ isLogedIn, setBoardListData }) {
 
   return (
     <NewTweetWrap>
-      <div><img src={isLogedIn ? JSON.parse(localStorage.getItem('userInfo')).image : `/images/users/${Math.floor(Math.random() * 5) + 1
+      <div><img src={isLogedIn ? JSON.parse(localStorage.getItem('userInfo')).image : `/images/users/${Math.floor(Math.random() * 8) + 1
 }.jpeg`} alt="프로필 이미지" /></div>
       <Nickname >{isLogedIn ? JSON.parse(localStorage.getItem('userInfo')).nickname : <Link to='/signin'>로그인을 해주세요</Link>}</Nickname>
       {isLogedIn
