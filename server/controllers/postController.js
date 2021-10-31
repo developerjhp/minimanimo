@@ -53,12 +53,14 @@ const updateMyPost = asyncHandler(async (req, res) => {
       _id: updatedPost._id,
       user: updatedPost.user,
       content: updatedPost.content,
+      updatedAt: updatedPost.updatedAt,
     });
   } else {
     res.status(404);
     throw new Error('Post not found');
   }
 });
+
 
 // @desc   Get user posts
 // @route  GET /api/posts/profile

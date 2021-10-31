@@ -1,46 +1,21 @@
-import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import Board from './Board';
 
 const BoardListWrap = styled.div`
-  height: 60vh;
-  margin: 2rem 2rem 0;
-  padding: 1.5rem;
-  text-align: left;
-  align-items: center;
+  margin-top: 2rem;
   background: #fff;
-  border-radius: 0.4rem;
-  box-shadow: 0 0 0.4rem 0.2rem #eee;
+  border-top: 1px solid #eee;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 `;
 
-export default function BoardList({ isLogedIn }) {
-  const [boardListData, setBoardListData] = useState('');
-
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-
-  useEffect(() => {
-    axios
-      .get('/api/posts', config)
-      .then((res) => {
-        //res.data에 들어가 있음,
-        console.log(res.data);
-        // setBoardListData(res.data)
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
+export default function BoardList({ isLogedIn, boardListData }) {
+  console.log(boardListData)
   return (
     <BoardListWrap>
-      <Board boardListData={boardListData} />
+      {boardListData.map(board => {
+        return <Board key={board._id} isLogedIn={isLogedIn} board={board} />
+      })}
     </BoardListWrap>
   );
 }
