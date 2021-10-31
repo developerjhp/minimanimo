@@ -1,9 +1,9 @@
 // err custom handler
 
 const notFound = (req, res, next) => {
-  const error = new Error(`Not Found - ${req.originalUrl}`);
+  const err = new Error(`Not Found - ${req.originalUrl}`);
   res.status(404);
-  next(error);
+  next(err);
 };
 
 const errHandler = (err, req, res, next) => {
@@ -11,7 +11,7 @@ const errHandler = (err, req, res, next) => {
   res.status(statusCode);
   res.json({
     message: err.message,
-    stack: process.env.NODE_ENV === "production" ? null : err.stack,
+    stack: process.env.NODE_ENV === 'production' ? null : err.stack,
   });
 };
 // err인데 200 코드가 난다면 500으로 바꾸기

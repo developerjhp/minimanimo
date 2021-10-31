@@ -62,6 +62,18 @@ const updateMyPost = asyncHandler(async (req, res) => {
 });
 
 
+// @desc   Delete user post
+// @route  Delete /api/posts/delete
+// @access Private
+const deleteMyPost = asyncHandler(async (req, res) => {
+  // 본인 게시물 삭제 요청
+  await Post.deleteOne({ _id: req.body._id });
+  res.status(200).json({
+    message: 'Delete success',
+  });
+});
+
+
 // @desc   Get user posts
 // @route  GET /api/posts/profile
 // @access Private
@@ -78,4 +90,4 @@ const getMyPosts = asyncHandler(async (req, res) => {
   }
 });
 
-export { getPosts, addPost, updateMyPost, getMyPosts };
+export { getPosts, addPost, updateMyPost, deleteMyPost, getMyPosts };

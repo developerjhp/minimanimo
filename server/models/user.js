@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import validator from 'validator';
+import moment from 'moment';
+import 'moment-timezone';
+
+moment.tz.setDefault('Asia/Seoul');
 
 const userSchema = mongoose.Schema(
   {
@@ -30,8 +34,11 @@ const userSchema = mongoose.Schema(
     },
   },
   {
-    timestamps: true,
-  } // 두번쨰 인자로 옵션을 줄 수 있는데 시간 필드를 자동으로 생성해준다.
+    timestamps: {
+      type: String,
+      default: () => moment().format('dddd, MMMM Do YYYY, h:mm:ss a'),
+    },
+  }
 );
 
 userSchema.methods.matchPassword = async function (enteredPassword) {
