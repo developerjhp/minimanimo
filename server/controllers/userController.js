@@ -21,7 +21,7 @@ const registerUser = asyncHandler(async (req, res) => {
     email,
     password,
     nickname,
-    image: `/images/users/${Math.floor(Math.random() * 5) + 1}.jpeg`,
+    image: `/images/users/${Math.floor(Math.random() * 8) + 1}.jpeg`,
   });
 
   if (user) {

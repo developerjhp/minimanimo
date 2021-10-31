@@ -27,11 +27,11 @@ const BoardWrap = styled.div`
   }
 
   textarea {
-    width: 100%;
     height: 10vh;
     resize: none;
     margin-left: 1rem;
-    border: 1px solid #e6e6e6;
+    padding: 0;
+    border: 1px solid #EDC51E;
   }
   
   textarea:focus {
@@ -48,7 +48,10 @@ const BoardWrap = styled.div`
 const ContentWrap = styled.div`
   display: flex;
   flex-direction: column;
-`
+  flex: 1 0 0;
+  overflow: auto;
+  word-wrap: break-word;
+  `
 const BtnWrap = styled.div`
   position: absolute;
   top: 1rem;
@@ -65,7 +68,7 @@ const Content = styled.div`
   margin-left: 1rem;
 `
 const CreatedAt = styled.div`
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   letter-spacing: 0.05rem;
   color: #444;
   position: absolute;
@@ -139,11 +142,10 @@ export default function Board({ isLogedIn, board }) {
     })
       .then(res => {
         setCanUSeeMe(false)
-        // console.log(res)
       })
-      .catch(err => 
+      .catch(err => {
         console.log(err)
-        )
+      })
   }
   
   return <BoardWrap className={canUSeeMe ? '' : 'delete'}>
@@ -163,8 +165,12 @@ export default function Board({ isLogedIn, board }) {
           }
         </BtnWrap>
       : null}
-      { board.createdAt === updatedAt 
-      ? <CreatedAt>{`생성일: ${year2}/${month2}/${day2.split('T')[0]} ${hour2}:${min2}`}</CreatedAt> 
-      : <CreatedAt>{`수정일: ${year}/${month}/${day.split('T')[0]} ${hour}:${min}`}</CreatedAt> }
+      {!editable
+      ? <CreatedAt>
+        { board.createdAt === updatedAt 
+        ? `생성일: ${year2}/${month2}/${day2.split('T')[0]} ${hour2}:${min2}`
+        : `수정일: ${year}/${month}/${day.split('T')[0]} ${hour}:${min}`}
+        </CreatedAt> 
+      : null }
   </BoardWrap>
 }

@@ -12,7 +12,6 @@ const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
 
   > .profile {
     height: 4vh;
@@ -24,6 +23,7 @@ const StyledHeader = styled.header`
   .userinfo {
     font-size: 1.2rem;
     font-weight: bold;
+    position: relative;
   }
   .profile_img {
     margin-right: 1rem;
@@ -33,17 +33,24 @@ const StyledHeader = styled.header`
   }
 
   ul {
+    width: 100%;
+    padding-top: 6vh;
     font-size: 1rem;
     font-weight: normal;
-    background: rgba(255, 255, 255, 0.8);
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 
   li {
-    width: 10vh;
     text-align: center;
     line-height: 2;
+    background: rgba(255, 255, 255, 0.8);
     border: 1px solid #eee;
     cursor: pointer;
+  }
+  li:first-child {
+    border-bottom: none;
   }
   li:hover {
     background: #eee;
@@ -72,6 +79,7 @@ export default function Header({ isLogedIn, isLogedInhandler }) {
 
   // 프로필 이미지(api 랜덤이미지), 닉네임
   // hover => drop down 기능 구현
+  // Advanced: dropdown icon 삽입
   return <StyledHeader className="header">
     <div>
       <Link to='/' className="logo"><img src={Symbol} alt="Symbol" /></Link>
