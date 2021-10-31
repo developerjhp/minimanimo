@@ -1,7 +1,6 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-// import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const BtnWrap = styled.div`
@@ -19,18 +18,8 @@ const SignUpBtn = styled.button`
     background-color: #EDC51E;
   }
 `
-const ValidText = styled.div`
-  margin: 0 0 0.2rem 0.2rem;
-  font-size: 0.8rem;
-  color: #387099;
-  display: none;
 
-  &.valid {
-    display: block;
-  }
-`
-
-const Button = ({ signUpInputInfo, signUpAllCheck }) => {
+const SignUpButton = ({ signUpInputInfo, signUpAllCheck }) => {
   // const { email, password, nickname } = req.body;
   const config = {
     headers: {
@@ -66,4 +55,4 @@ const Button = ({ signUpInputInfo, signUpAllCheck }) => {
   </>
 }
 
-export default Button;
+export default SignUpButton;

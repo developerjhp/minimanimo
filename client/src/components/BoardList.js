@@ -10,7 +10,6 @@ const BoardListWrap = styled.div`
 `;
 
 export default function BoardList({ isLogedIn, boardListData }) {
-  console.log(boardListData)
   return (
     <BoardListWrap>
       {boardListData.map(board => {

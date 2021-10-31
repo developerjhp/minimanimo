@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -50,7 +50,7 @@ const ValidText = styled.div`
   }
 `
 
-const Button = ({ signInInputInfo, setSignInInputInfo, isLogedIn, isLogedInhandler }) => {
+const SignInButton = ({ signInInputInfo, setSignInInputInfo, isLogedIn, isLogedInhandler }) => {
   // signin 버튼을 클릭하면, 현재 가지고있는 inputInfo를 가지고 서버에게 axios post 요청
   // TODO: inputInfo id, password 유효성검사해서 버튼 눌려도 axios 요청 안가고 바로 문구 표출
   // TODO: input 유효성 검사 
@@ -106,4 +106,4 @@ const Button = ({ signInInputInfo, setSignInInputInfo, isLogedIn, isLogedInhandl
   </>
 }
 
-export default Button;
+export default SignInButton;

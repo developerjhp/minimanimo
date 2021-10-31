@@ -25,9 +25,8 @@ const InputWrap = styled.div`
   }
 `
 
-const Input = ({signInInputInfo, setSignInInputInfo}) => {
+const SignInInput = ({signInInputInfo, setSignInInputInfo}) => {
   // TODO: 서버에 signin 요청 후 잘못됐을때 ValidText 표출 및 input outline 붉은색으로 변경
-
   
   const InputuserInfo = (e) => {
     if (e.target.type === 'email') {
@@ -39,12 +38,12 @@ const Input = ({signInInputInfo, setSignInInputInfo}) => {
 
   return (
     <InputWrap>
-      <label for="clickid">Email</label>
+      <label htmlFor="clickid">Email</label>
       <input id="clickid" type="email" placeholder="email" value={signInInputInfo.email} onChange={InputuserInfo} />
-      <label for="clickpwd">Password</label>
+      <label htmlFor="clickpwd">Password</label>
       <input id="clickpwd" type="password" placeholder="password" value={signInInputInfo.password} onChange={InputuserInfo}/>
     </InputWrap>
   )
 }
 
-export default Input;
+export default SignInInput;

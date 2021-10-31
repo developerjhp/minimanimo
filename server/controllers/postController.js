@@ -1,16 +1,21 @@
 import asyncHandler from 'express-async-handler';
 import Post from '../models/post.js';
+import moment from 'moment';
+import moment2 from 'moment-timezone';
 
 // @desc   Fetch all posts
 // @route  GET /api/posts
 // @access Public
+moment2.tz.setDefault('Asia/Seoul');
 const getPosts = asyncHandler(async (req, res) => {
   // 전체 게시물 요청
   const posts = await Post.find({})
     .populate('user', ['nickname', 'image'])
     .sort({ createdAt: 1 })
     .exec();
-  if (posts) res.status(200).json(posts);
+  if (posts) res.status(200).json(posts.map(el => {
+    return {...el._doc, createdAt : moment(el.createdAt).format(), updatedAt: moment(el.updatedAt).format()}
+  }));
 });
 
 // @desc   Create new post
@@ -53,14 +58,13 @@ const updateMyPost = asyncHandler(async (req, res) => {
       _id: updatedPost._id,
       user: updatedPost.user,
       content: updatedPost.content,
-      updatedAt: updatedPost.updatedAt,
+      updatedAt: moment(updatedPost.updatedAt).format(),
     });
   } else {
     res.status(404);
     throw new Error('Post not found');
   }
 });
-
 
 // @desc   Delete user post
 // @route  Delete /api/posts/delete
@@ -72,7 +76,6 @@ const deleteMyPost = asyncHandler(async (req, res) => {
     message: 'Delete success',
   });
 });
-
 
 // @desc   Get user posts
 // @route  GET /api/posts/profile

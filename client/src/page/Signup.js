@@ -40,7 +40,7 @@ const Signup = ({isLogedIn, isLogedInhandler}) => {
   // useEffect로 signUpValid 감시 => 다 트루면 변경 => 버튼으로 내려주기
 
   useEffect(() => {
-    console.log(Object.entries(signUpValid).flat().every(el=> el))
+    // console.log(Object.entries(signUpValid).flat().every(el=> el))
     //signUpvalid가 변경될떄마다, 체크하고 만약 signUpvalid의 모든 value값이 true가 될 경우 signUpAllCheck를 트루를 바꿔야됨. 
     // if(Object.entries(signUpValid).every()) {  // [[],[],[],[]]
     if(Object.entries(signUpValid).flat().every(el=> el)){

@@ -76,12 +76,12 @@ export default function Header({ isLogedIn, isLogedInhandler }) {
     <div>
       <Link to='/' className="logo"><img src={Symbol} alt="Symbol" /></Link>
     </div>
-    <div className="profile" onMouseLeave={hideDropdown} show={show}
+    <div className="profile" onMouseLeave={hideDropdown} show={show ? 1 : 0}
       onMouseEnter={showDropdown}>
       <div className="userinfo">
         {isLogedIn
           ? <div>
-              <img className="profile_img" src={isLogedIn ? JSON.parse(localStorage.getItem('userInfo')).image : '/images/users/1.jpeg'} alt="프로필 이미지" />
+              <img className="profile_img" src={JSON.parse(localStorage.getItem('userInfo')).image} alt="프로필 이미지" />
               {JSON.parse(localStorage.getItem('userInfo')).nickname}
             </div>
           : <Link to='/signin'>Sign in</Link>
