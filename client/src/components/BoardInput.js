@@ -96,7 +96,7 @@ export default function BoardInput({ isLogedIn, setBoardListData }) {
           // setCreateInputState(!createInputState)
           axios.get('/api/posts', config2)
             .then(res => {
-              setBoardListData([...res.data].reverse())
+              setBoardListData([...res.data])
             })
             .catch(err => {
               console.log(err)

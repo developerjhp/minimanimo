@@ -7,7 +7,7 @@ const BoardListWrap = styled.div`
   background: #fff;
   border-top: 1px solid #eee;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
 
   .list_none {
     line-height: 80vh;
