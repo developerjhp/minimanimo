@@ -1,10 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import validator from 'validator';
-import moment from 'moment';
-import 'moment-timezone';
-
-moment.tz.setDefault('Asia/Seoul');
 
 const userSchema = mongoose.Schema(
   {
@@ -34,10 +30,7 @@ const userSchema = mongoose.Schema(
     },
   },
   {
-    timestamps: {
-      type: String,
-      default: () => moment().format('dddd, MMMM Do YYYY, h:mm:ss a'),
-    },
+    timestamps: true,
   }
 );
 
