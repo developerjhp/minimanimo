@@ -67,7 +67,7 @@ const updateMyPost = asyncHandler(async (req, res) => {
 // @access Private
 const deleteMyPost = asyncHandler(async (req, res) => {
   // 본인 게시물 삭제 요청
-  await Post.deleteOne({ _id: req.body._id });
+  await Post.deleteOne({  _id:req.body._id });
   res.status(200).json({
     message: 'Delete success',
   });

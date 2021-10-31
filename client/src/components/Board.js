@@ -133,10 +133,17 @@ export default function Board({ isLogedIn, board }) {
   }
   
   const deleteAxios = () => {
-    axios.delete('/api/posts/delete', { _id: board._id }, config)
+    axios.delete('/api/posts/delete', {
+      ...config,
+      data: {_id : board._id} 
+    })
       .then(res => {
         setCanUSeeMe(false)
+        console.log(res)
       })
+      .catch(err => 
+        console.log(err)
+        )
   }
   
   return <BoardWrap className={canUSeeMe ? '' : 'delete'}>
