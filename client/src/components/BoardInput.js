@@ -22,17 +22,18 @@ const NewTweetWrap = styled.div`
     border-radius: 50%;
   }
 
-  input {
+  textarea {
     height: 10vh;
+    resize: none;
     line-height: 1;
     border: 1px solid #e6e6e6;
     flex: 7 0 0;
   }
   
-  input:focus {
+  textarea:focus {
     outline: 1px solid #EDC51E;
   }
-  input::placeholder {
+  textarea::placeholder {
     color :  #cccccc;
     font-style: italic;
   }
@@ -60,7 +61,7 @@ const SubmitBtn = styled.button`
   }
 `
 
-export default function BoardInput({ isLogedIn }) {
+export default function BoardInput({ isLogedIn, setBoardListData }) {
 
   const [newInputValue, setNewInputValue] = useState('')
 
@@ -77,6 +78,12 @@ export default function BoardInput({ isLogedIn }) {
     },
   };
 
+  const config2 = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
   const submitBtnHandler = () => {
     //axios post 요청 (_id(localstorage userInfo._id)), 토큰(header), newInputValue 전송)
     //서버에서 외부에서 못들어오도록 막아서 이거 할때 토큰도 같이 보내야 함.
@@ -85,6 +92,15 @@ export default function BoardInput({ isLogedIn }) {
         .then(res => {
           console.log("잘되었어요")
           setNewInputValue('')
+          // 여기서 Main 상태변경을 알려줘야 함.
+          // setCreateInputState(!createInputState)
+          axios.get('/api/posts', config2)
+            .then(res => {
+              setBoardListData([...res.data].reverse())
+            })
+            .catch(err => {
+              console.log(err)
+            })
         }).catch(err => {
           console.log(err)
         })
@@ -96,8 +112,8 @@ export default function BoardInput({ isLogedIn }) {
       <div><img src={isLogedIn ? JSON.parse(localStorage.getItem('userInfo')).image : '/images/users/1.jpeg'} alt="프로필 이미지" /></div>
       <Nickname >{isLogedIn ? JSON.parse(localStorage.getItem('userInfo')).nickname : <Link to='/signin'>로그인을 해주세요</Link>}</Nickname>
       {isLogedIn
-        ? <input type="text" value={newInputValue} onChange={newInputValueHandler} maxLength={255} />
-        : <input type="text" value="" disabled placeholder="로그인 후 작성 가능합니다." />}
+        ? <textarea type="text" value={newInputValue} onChange={newInputValueHandler} maxLength={255} />
+        : <textarea type="text" value="" disabled placeholder="로그인 후 작성 가능합니다." />}
       <SubmitBtn disabled={isLogedIn ? false : true} onClick={submitBtnHandler}>Submit</SubmitBtn>
     </NewTweetWrap>
   )
