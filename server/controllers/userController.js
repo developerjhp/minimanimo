@@ -7,8 +7,6 @@ import generateToken from './utils/generateToken.js';
 // @access Public
 const registerUser = asyncHandler(async (req, res) => {
   // 회원가입 요청
-  console.log(req.body);
-
   const { email, password, nickname } = req.body;
 
   // 이메일 중복 검사

@@ -1,4 +1,8 @@
 import mongoose from 'mongoose';
+import moment from 'moment';
+import 'moment-timezone';
+
+moment.tz.setDefault('Asia/Seoul');
 
 const postSchema = mongoose.Schema(
   {
@@ -14,7 +18,10 @@ const postSchema = mongoose.Schema(
     },
   },
   {
-    timestamps: true,
+    timestamps: {
+      type: String,
+      default: () => moment().format('dddd, MMMM Do YYYY, h:mm:ss a'),
+    },
   }
 );
 
