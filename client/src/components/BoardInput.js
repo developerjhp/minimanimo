@@ -43,6 +43,7 @@ const Nickname = styled.div`
   margin: 0 1rem;
   font-weight: bold;
   flex: 1 0 0;
+  text-align: center;
 `
 const SubmitBtn = styled.button`
   height: 40%;
