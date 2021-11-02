@@ -6,6 +6,8 @@ import Signin from './page/Signin';
 import Signup from './page/Signup';
 import { useEffect, useState } from 'react';
 
+import Footer from './components/Footer'
+
 
 const App = () => {
   //로그인 상태관리 여기서 하기
@@ -42,6 +44,7 @@ const App = () => {
           <Mypage isLogedIn={isLogedIn} isLogedInhandler={isLogedInhandler} />
         </Route>
       </Switch>
+        <Footer/>
     </BrowserRouter>
   )
 }

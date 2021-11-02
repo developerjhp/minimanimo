@@ -23,7 +23,7 @@ export default function BoardList({ isLogedIn, boardListData }) {
         return <Board key={board._id} isLogedIn={isLogedIn} board={board} />
       })
       : <Link to='/' className="list_none">
-          <div>작성하신 게시글이 존재하지 않습니다.</div>
+          <div>게시글이 존재하지 않습니다.</div>
         </Link>}
     </BoardListWrap>
   );

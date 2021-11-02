@@ -5,6 +5,8 @@ import Header from '../components/Header';
 import MypageInfo from '../components/MypageInfo';
 import BoardList from '../components/BoardList';
 
+
+
 const Mypage = ({ isLogedIn, isLogedInhandler }) => {
   //마이페이지에 처음 들어오면 서버에 get요청을 보내서 내 정보와 내가쓴글을 다 받아와야함.
   const [myBoardListData, setMyBoardListData] = useState([]);
@@ -23,7 +25,7 @@ const Mypage = ({ isLogedIn, isLogedInhandler }) => {
       axios
         .get('/api/posts/mine', config) 
         .then((res) => {
-          setMyBoardListData([...res.data].reverse())
+          setMyBoardListData([...res.data])
         })
         .catch((err) => {
           console.log('에러났다', err);
@@ -35,7 +37,7 @@ const Mypage = ({ isLogedIn, isLogedInhandler }) => {
     <Header isLogedIn={isLogedIn} isLogedInhandler={isLogedInhandler} /> 
     {isLogedIn 
     ? <div>
-        <MypageInfo />
+        <MypageInfo isLogedInhandler={isLogedInhandler} />
         <BoardList isLogedIn={isLogedIn} boardListData={myBoardListData} />
       </div>
     : <>
@@ -43,6 +45,7 @@ const Mypage = ({ isLogedIn, isLogedInhandler }) => {
         <div>로그인 후 이용가능합니다.</div>
       </>
     }
+    
   </>
 }
 

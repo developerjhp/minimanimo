@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import User from '../models/user.js';
+import Post from '../models/post.js';
 import generateToken from './utils/generateToken.js';
 
 // @desc   Register a new user
@@ -89,24 +90,20 @@ const getUserProfile = asyncHandler(async (req, res) => {
 // @access Private
 const updateUserProfile = asyncHandler(async (req, res) => {
   // 회원 정보 수정 요청
-  // 수정 요청으로 들어온 데이터로 변경해 저장한다.
-
   const user = await User.findById(req.user._id);
 
   if (user) {
     user.nickname = req.body.nickname || user.nickname;
-    if (req.body.password) {
-      user.password = req.body.password;
-    }
-
+    user.image = req.body.image || user.image;
+    // if (req.body.image) {
+    //   user.image = req.body.image;
+    // }
     const updatedUser = await user.save();
 
     res.json({
       _id: updatedUser._id,
       nickname: updatedUser.nickname,
-      email: updatedUser.email,
       image: updatedUser.image,
-      token: generateToken(updatedUser._id),
     });
   } else {
     res.status(404);
@@ -114,4 +111,35 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-export { registerUser, authUser, getUserProfile, updateUserProfile };
+// @desc   Delete user profile
+// @route  DELETE /api/users/profile
+// @access Private
+const deleteUserInfo = asyncHandler(async (req, res) => {
+  // 회원 탈퇴 요청
+
+  await Post.deleteMany({user: req.user._id})
+  await User.findByIdAndDelete(req.user._id)
+
+  // User.findByIdAndDelete(req.user._id, function(err, foundUser) {
+  //   if (err) {
+  //     res.status(400)
+  //     throw new Error('User not exist')
+  //   }
+  //   else {
+  //     Post.remove({user: req.user._id});
+  //   }
+  // });
+
+  res.status(200).json({
+    message: 'User Info deleted',
+  });
+  
+});
+
+export {
+  registerUser,
+  authUser,
+  getUserProfile,
+  updateUserProfile,
+  deleteUserInfo,
+};

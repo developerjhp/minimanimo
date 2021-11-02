@@ -24,6 +24,11 @@ const InputWrap = styled.div`
   b {
     border-bottom: 1px solid #EDC51E;
   }
+  span {
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+    color: tomato;
+  }
   `
                 //우리가 입력한 값 (보낼값)               //개별 유효성 체크(boolean)
 const SignUpInput = ({signUpInputInfo, setSignUpInputInfo, signUpValid, setSignUpValid}) => {
