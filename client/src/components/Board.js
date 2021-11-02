@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { FaFeatherAlt, FaTrashAlt, FaCheckCircle } from 'react-icons/fa';
 
 const BoardWrap = styled.div`
   height: 16vh;
@@ -39,10 +40,13 @@ const BoardWrap = styled.div`
   }
 
   button {
+    font-size: 1.2rem;
+    color: #387099;
     margin-left: 1rem;
+    background: none;
   }
   button:hover {
-    background: #aaa;
+    color: #EDC51E;
   }
 `
 const ContentWrap = styled.div`
@@ -158,11 +162,11 @@ export default function Board({ isLogedIn, board }) {
       </ContentWrap>
       {isLogedIn && board.user._id === JSON.parse(localStorage.getItem('userInfo'))._id
       ? <BtnWrap>
-          <button onClick={deleteAxios}>delete</button>
           {editable
-          ? <button onClick={postAxios}>ok</button>
-          : <button onClick={editHandler}>edit</button>
-          }
+          ? <button onClick={postAxios}><FaCheckCircle /></button>
+          : <button onClick={editHandler}><FaFeatherAlt /></button>
+        }
+        <button onClick={deleteAxios}><FaTrashAlt /></button>
         </BtnWrap>
       : null}
       {!editable
