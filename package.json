@@ -4,7 +4,7 @@
   "description": "Simple message board",
   "main": "index.js",
   "scripts": {
-    "start" : "node server/index.js",
+    "start": "node server/index.js",
     "server": "nodemon --delay 2 server/index",
     "client": "npm start --prefix client",
     "predev": "kill -9 $(lsof -i :5000 | grep -i -E -o '\\s[0-9]+\\s') || true",
@@ -25,6 +25,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-async-handler": "^1.2.0",

@@ -14,7 +14,7 @@ const Main = ({ isLogedIn, isLogedInhandler }) => {
       },
     };
     axios
-      .get('/api/posts', config)
+      .get('http://ec2-3-37-98-188.ap-northeast-2.compute.amazonaws.com/api/posts', config)
       .then((res) => {
         setBoardListData([...res.data])
       })

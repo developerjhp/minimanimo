@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router';
+// import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import Modal from 'react-modal';
 import axios from 'axios';
@@ -152,7 +152,7 @@ export default function MypageInfo ({ isLogedInhandler }) {
   const [isExistNickname, setIsExistNickname] = useState(false)
   const [selectImg , setSelectImg] = useState(newInputInfo.image.split("/")[3].split('.')[0])
 
-  const history = useHistory()
+  // const history = useHistory()
   
   const reSignModalhandler = () => {
     setReSignIsOpen(!reSignIsOpen)
@@ -178,7 +178,7 @@ export default function MypageInfo ({ isLogedInhandler }) {
       }
       else {
         //서버에 axios포스트로 중복되었는지 봐야됨.
-        axios.post('/api/validate/nickname', { nickname : e.target.value}, config)
+        axios.post('http://ec2-3-37-98-188.ap-northeast-2.compute.amazonaws.com/api/validate/nickname', { nickname : e.target.value}, config)
         .then(res => {
           setIsExistNickname(false)
           setValidNickname(true)
@@ -194,7 +194,7 @@ export default function MypageInfo ({ isLogedInhandler }) {
   }
   
   const reSignhandler = () => {
-    axios.delete('/api/users/profile', {
+    axios.delete('http://ec2-3-37-98-188.ap-northeast-2.compute.amazonaws.com/api/users/profile', {
       headers: {
         Authorization: `Bearer ${newInputInfo.token}`,
         'Content-Type': 'application/json',
@@ -214,7 +214,7 @@ export default function MypageInfo ({ isLogedInhandler }) {
     
     if(editNewNickname === '' && !isExistNickname && selectImg !== newInputInfo.image.split("/")[3].split('.')[0]){
       //이미지만 변경한 경우 닉네임 변경하지 않음.
-      axios.put('/api/users/profile', 
+      axios.put('http://ec2-3-37-98-188.ap-northeast-2.compute.amazonaws.com/api/users/profile', 
       {
         image : `/images/users/${selectImg}.jpeg`,
         nickname : newInputInfo.nickname
@@ -237,7 +237,7 @@ export default function MypageInfo ({ isLogedInhandler }) {
       })
     }
     else if (editNewNickname !== '' && !isExistNickname && validNickname) {
-      axios.put('/api/users/profile', 
+      axios.put('http://ec2-3-37-98-188.ap-northeast-2.compute.amazonaws.com/api/users/profile', 
       {
         image : `/images/users/${selectImg}.jpeg`,
         nickname : editNewNickname

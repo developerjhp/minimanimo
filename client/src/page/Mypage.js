@@ -23,7 +23,7 @@ const Mypage = ({ isLogedIn, isLogedInhandler }) => {
   
     if(isLogedIn && config.headers.authorization){
       axios
-        .get('/api/posts/mine', config) 
+        .get('http://ec2-3-37-98-188.ap-northeast-2.compute.amazonaws.com/api/posts/mine', config) 
         .then((res) => {
           setMyBoardListData([...res.data])
         })

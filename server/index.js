@@ -14,12 +14,21 @@ const postRoutes = require('./routes/postRoutes')
 // import postRoutes from "./routes/postRoutes.js";
 const { errHandler, notFound } = require('./middleware/error')
 // import { errHandler, notFound } from "./middleware/error.js";
+const cors = require('cors');
+
 
 dotenv.config();
 connectDB();
 
 const app = express();
 app.use(express.json()); // body-parser
+app.use(
+  cors({
+    origin: ['http://minimanimo.s3-website.ap-northeast-2.amazonaws.com'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+  })
+);
+
 
 app.get("/", (req, res) => {
   res.send("Minimanimo API is running...");

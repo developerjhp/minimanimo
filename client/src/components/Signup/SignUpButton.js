@@ -35,7 +35,7 @@ const SignUpButton = ({ signUpInputInfo, signUpAllCheck }) => {
     const payload = { email: signUpInputInfo.email, password, nickname }
 
     if (signUpAllCheck) {
-      axios.post('/api/users', {
+      axios.post('http://ec2-3-37-98-188.ap-northeast-2.compute.amazonaws.com/api/users', {
         ...payload
       }, config)
         .then(res => {
