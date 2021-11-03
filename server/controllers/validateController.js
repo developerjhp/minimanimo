@@ -1,5 +1,8 @@
-import asyncHandler from "express-async-handler";
-import User from "../models/user.js";
+// import asyncHandler from "express-async-handler";
+// import User from "../models/user.js";
+
+const asyncHandler = require("express-async-handler");
+const User = require("../models/user")
 
 // @desc   Validate a email address
 // @route  POST /api/validate/email
@@ -36,4 +39,5 @@ const validateNickname = asyncHandler(async (req, res) => {
   res.status(200).send({ message: "ok" });
 });
 
-export { validateEmail, validateNickname };
+// export { validateEmail, validateNickname };
+module.exports = { validateEmail, validateNickname };

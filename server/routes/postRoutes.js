@@ -1,12 +1,22 @@
-import express from 'express';
-import {
+// import express from 'express';
+// import {
+//   getPosts,
+//   addPost,
+//   updateMyPost,
+//   deleteMyPost,
+//   getMyPosts,
+// } from '../controllers/postController.js';
+// import { protect } from '../middleware/auth.js'; // for private routes
+
+const express = require("express");
+const {
   getPosts,
   addPost,
   updateMyPost,
   deleteMyPost,
   getMyPosts,
-} from '../controllers/postController.js';
-import { protect } from '../middleware/auth.js'; // for private routes
+} = require("../controllers/postController")
+const { protect } = require("../middleware/auth")
 
 const router = express.Router();
 
@@ -18,4 +28,5 @@ router.route('/delete').delete(protect, deleteMyPost);
 
 router.route('/mine').get(protect, getMyPosts); // 마이페이지 용
 
-export default router;
+// export default router;
+module.exports = router; 

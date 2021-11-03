@@ -1,4 +1,6 @@
-import bcrypt from "bcryptjs";
+// import bcrypt from "bcryptjs";
+
+const bcrypt = require("bcryptjs");
 
 const users = [
   {
@@ -15,7 +17,8 @@ const users = [
   },
 ];
 
-export default users;
+// export default users;
+module.exports = users;
 // to hash the password should install becryptjs
 // 패스워드를 해시하는데는 다양한 방법이 있는데
 // 기본적인 방법이 비동기로 하는 것
