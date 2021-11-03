@@ -1,11 +1,19 @@
-import express from "express";
-import dotenv from "dotenv";
-import colors from "colors";
-import connectDB from "./config/db.js";
-import validateRoutes from "./routes/validateRoutes.js";
-import userRoutes from "./routes/userRoutes.js";
-import postRoutes from "./routes/postRoutes.js";
-import { errHandler, notFound } from "./middleware/error.js";
+const express = require('express')
+// import express from "express";
+const dotenv = require('dotenv')
+// import dotenv from "dotenv";
+const colors = require('colors')
+// import colors from "colors";
+const connectDB = require('./config/db')
+// import connectDB from "./config/db.js";
+const validateRoutes = require('./routes/validateRoutes')
+// import validateRoutes from "./routes/validateRoutes.js";
+const userRoutes = require('./routes/userRoutes')
+// import userRoutes from "./routes/userRoutes.js";
+const postRoutes = require('./routes/postRoutes')
+// import postRoutes from "./routes/postRoutes.js";
+const { errHandler, notFound } = require('./middleware/error')
+// import { errHandler, notFound } from "./middleware/error.js";
 
 dotenv.config();
 connectDB();
@@ -26,7 +34,7 @@ app.use("/api/posts", postRoutes);
 app.use(notFound);
 app.use(errHandler);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 80;
 
 const server = app.listen(PORT, () =>
   console.log(
@@ -36,4 +44,5 @@ const server = app.listen(PORT, () =>
   )
 );
 
-export default server;
+// export default server;
+module.exports = server;

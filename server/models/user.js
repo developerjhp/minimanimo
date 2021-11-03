@@ -1,6 +1,10 @@
-import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
-import validator from 'validator';
+// import mongoose from 'mongoose';
+// import bcrypt from 'bcryptjs';
+// import validator from 'validator';
+
+const mongoose = require('mongoose')
+const bcrypt = require('bcryptjs')
+const validator = require('validator')
 
 const userSchema = mongoose.Schema(
   {
@@ -51,5 +55,5 @@ userSchema.pre('save', async function (next) {
 
 const User = mongoose.model('User', userSchema);
 
-export default User;
+module.exports = User
 // 유저 스키마 작성 및 모델 생성

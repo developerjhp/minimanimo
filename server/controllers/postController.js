@@ -1,7 +1,13 @@
-import asyncHandler from 'express-async-handler';
-import Post from '../models/post.js';
-import moment from 'moment';
-import moment2 from 'moment-timezone';
+// import asyncHandler from 'express-async-handler';
+// import Post from '../models/post.js';
+// import moment from 'moment';
+// import moment2 from 'moment-timezone';
+
+const asyncHandler = require("express-async-handler");
+const Post = require("../models/post");
+const moment = require("moment");
+const moment2 = require("moment-timezone");
+
 moment2.tz.setDefault('Asia/Seoul');
 
 // @desc   Fetch all posts
@@ -24,7 +30,7 @@ const getPosts = asyncHandler(async (req, res) => {
 const addPost = asyncHandler(async (req, res) => {
   // 포스팅 추가 요청
   // req.body로 들어온 회원정보 이용.
-  console.log(req.body);
+  // console.log(req.body);
   const { content } = req.body;
 
   if (!content) {
@@ -96,4 +102,5 @@ const getMyPosts = asyncHandler(async (req, res) => {
   }
 });
 
-export { getPosts, addPost, updateMyPost, deleteMyPost, getMyPosts };
+// export { getPosts, addPost, updateMyPost, deleteMyPost, getMyPosts };
+module.exports = { getPosts, addPost, updateMyPost, deleteMyPost, getMyPosts };

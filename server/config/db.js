@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+// import mongoose from "mongoose";
+const mongoose = require("mongoose")
 
 const connectDB = async () => {
   try {
@@ -14,5 +15,6 @@ const connectDB = async () => {
   }
 };
 
-export default connectDB;
+// export default connectDB;
+module.exports = connectDB;
 // 데이터베이스 연결

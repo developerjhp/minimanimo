@@ -1,7 +1,12 @@
-import asyncHandler from 'express-async-handler';
-import User from '../models/user.js';
-import Post from '../models/post.js';
-import generateToken from './utils/generateToken.js';
+// import asyncHandler from 'express-async-handler';
+// import User from '../models/user.js';
+// import Post from '../models/post.js';
+// import generateToken from './utils/generateToken.js';
+
+const asyncHandler = require("express-async-handler");
+const User = require("../models/user");
+const Post = require("../models/post");
+const generateToken = require("./utils/generateToken");
 
 // @desc   Register a new user
 // @route  POST /api/users
@@ -136,7 +141,7 @@ const deleteUserInfo = asyncHandler(async (req, res) => {
   
 });
 
-export {
+module.exports = {
   registerUser,
   authUser,
   getUserProfile,

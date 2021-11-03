@@ -204,7 +204,9 @@ export default function MypageInfo ({ isLogedInhandler }) {
         reSignModalhandler()
         isLogedInhandler()
         localStorage.removeItem('userInfo')
-      }).catch(err=> console.log(err))
+      }).catch(err=> {
+        
+      })
   }
 
   const editUserInfoHandler = () => {
@@ -223,8 +225,8 @@ export default function MypageInfo ({ isLogedInhandler }) {
         }
       })
       .then(res => {
-        console.log(1)
-        console.log(res.data)
+        // console.log(1)
+        // console.log(res.data)
         setEditIsOpen(false)
         //닉네임이랑 image가 찍혀있었음. 기존꺼 에서 닉네임하고 이미지만 바꿔서 저장해주면 됨.
         localStorage.setItem('userInfo', JSON.stringify({...newInputInfo, image:res.data.image}))
@@ -246,8 +248,8 @@ export default function MypageInfo ({ isLogedInhandler }) {
         },
       })
       .then(res => {
-        console.log(2)
-        console.log(res.data)
+        // console.log(2)
+        // console.log(res.data)
         setEditIsOpen(false)
         localStorage.setItem('userInfo', JSON.stringify({...newInputInfo, image:res.data.image, nickname: res.data.nickname}))
         window.location.reload()
@@ -300,9 +302,9 @@ export default function MypageInfo ({ isLogedInhandler }) {
           <img src={`/images/users/${selectImg}.jpeg`} alt="프로필 이미지" />
           <input type="nickname" placeholder="Edit New Nickname" value={editNewNickname} onChange={editNewNicknameHandler}/>
           {/* { editNewNickname === '' || validNickname  ? null : <span>닉네임은 공백제외 2글자 이상 10글자 이하여야 합니다.</span> } */}
-          <IsValidNick  visibility={editNewNickname === '' || validNickname }><span>닉네임은 공백제외 2글자 이상 10글자 이하여야 합니다.</span></IsValidNick>
+          <IsValidNick  visibility={editNewNickname === '' || validNickname ? 1 : 0}><span>닉네임은 공백제외 2글자 이상 10글자 이하여야 합니다.</span></IsValidNick>
           {/* { isExistNickname ? <span>중복된 닉네임입니다.</span> : null} */}
-          <IsValidNick2 visibility={isExistNickname}><span>중복된 닉네임입니다.</span></IsValidNick2>
+          <IsValidNick2 visibility={isExistNickname ? 1 : 0}><span>중복된 닉네임입니다.</span></IsValidNick2>
         </ContentBox>
         <BtnWrap>
           <CancelBtn onClick={editModalhandler}>Cancle</CancelBtn>

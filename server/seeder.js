@@ -1,11 +1,11 @@
-import dotenv from "dotenv";
-import mongoose from "mongoose";
-import colors from "colors";
-import connectDB from "./config/db.js";
-import posts from "./data/posts.js";
-import users from "./data/users.js";
-import Post from "./models/post.js";
-import User from "./models/user.js";
+const dotenv = require('dotenv')
+const colors = require('colors')
+const mongoose = require('mongoose')
+const connectDB = require('./config/db')
+const posts = require('./data/posts')
+const users = require('./data/users')
+const Post = require('./models/post')
+const User = require('./models/user')
 
 dotenv.config();
 connectDB();
