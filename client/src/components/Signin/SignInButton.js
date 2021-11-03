@@ -79,7 +79,7 @@ const SignInButton = ({ signInInputInfo, setSignInInputInfo, isLogedIn, isLogedI
     let pwdExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
 
     if (idExp.test(signInInputInfo.email) && pwdExp.test(signInInputInfo.password)) {
-      axios.post('/api/users/login', { email: signInInputInfo.email, password: signInInputInfo.password })
+      axios.post('http://ec2-3-37-98-188.ap-northeast-2.compute.amazonaws.com/api/users/login', { email: signInInputInfo.email, password: signInInputInfo.password })
         .then((res) => {
           const userInfo = res.data // 서버에서 받아온 유저정보
           // localStorge 데이터 저장
