@@ -129,7 +129,7 @@ export default function Board({ isLogedIn, board }) {
     }
 
     // console.log(dateFormat(new Date()))
-    axios.put('/api/posts/edit', { _id: board._id, content: editValue, updatedAt : dateFormat(new Date()) }, config)
+    axios.put('api/posts/edit', { _id: board._id, content: editValue, updatedAt : dateFormat(new Date()) }, config)
       .then(res => {
         setEditable(!editable)
         setUpdatedAt(res.data.updatedAt)
@@ -140,7 +140,7 @@ export default function Board({ isLogedIn, board }) {
   }
   
   const deleteAxios = () => {
-    axios.delete('/api/posts/delete', {
+    axios.delete('api/posts/delete', {
       ...config,
       data: {_id : board._id} 
     })

@@ -35,7 +35,7 @@ const SignUpButton = ({ signUpInputInfo, signUpAllCheck }) => {
     const payload = { email: signUpInputInfo.email, password, nickname }
 
     if (signUpAllCheck) {
-      axios.post('/api/users', {
+      axios.post('api/users', {
         ...payload
       }, config)
         .then(res => {

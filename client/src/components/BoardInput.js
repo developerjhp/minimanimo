@@ -89,13 +89,13 @@ export default function BoardInput({ isLogedIn, setBoardListData }) {
     //axios post 요청 (_id(localstorage userInfo._id)), 토큰(header), newInputValue 전송)
     //서버에서 외부에서 못들어오도록 막아서 이거 할때 토큰도 같이 보내야 함.
     if (newInputValue !== '') {
-      axios.post('/api/posts/new', { content: newInputValue }, config)
+      axios.post('api/posts/new', { content: newInputValue }, config)
         .then(res => {
           console.log("잘되었어요")
           setNewInputValue('')
           // 여기서 Main 상태변경을 알려줘야 함.
           // setCreateInputState(!createInputState)
-          axios.get('/api/posts', config2)
+          axios.get('api/posts', config2)
             .then(res => {
               setBoardListData([...res.data])
             })

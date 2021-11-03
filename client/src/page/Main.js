@@ -14,7 +14,7 @@ const Main = ({ isLogedIn, isLogedInhandler }) => {
       },
     };
     axios
-      .get('/api/posts', config)
+      .get('api/posts', config)
       .then((res) => {
         setBoardListData([...res.data])
       })
