@@ -23,7 +23,7 @@ const Mypage = ({ isLogedIn, isLogedInhandler }) => {
   
     if(isLogedIn && config.headers.authorization){
       axios
-        .get('api/posts/mine', config) 
+        .get('/api/posts/mine', config) 
         .then((res) => {
           setMyBoardListData([...res.data])
         })

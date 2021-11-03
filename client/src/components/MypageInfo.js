@@ -178,7 +178,7 @@ export default function MypageInfo ({ isLogedInhandler }) {
       }
       else {
         //서버에 axios포스트로 중복되었는지 봐야됨.
-        axios.post('api/validate/nickname', { nickname : e.target.value}, config)
+        axios.post('/api/validate/nickname', { nickname : e.target.value}, config)
         .then(res => {
           setIsExistNickname(false)
           setValidNickname(true)
@@ -194,7 +194,7 @@ export default function MypageInfo ({ isLogedInhandler }) {
   }
   
   const reSignhandler = () => {
-    axios.delete('api/users/profile', {
+    axios.delete('/api/users/profile', {
       headers: {
         Authorization: `Bearer ${newInputInfo.token}`,
         'Content-Type': 'application/json',
@@ -214,7 +214,7 @@ export default function MypageInfo ({ isLogedInhandler }) {
     
     if(editNewNickname === '' && !isExistNickname && selectImg !== newInputInfo.image.split("/")[3].split('.')[0]){
       //이미지만 변경한 경우 닉네임 변경하지 않음.
-      axios.put('api/users/profile', 
+      axios.put('/api/users/profile', 
       {
         image : `/images/users/${selectImg}.jpeg`,
         nickname : newInputInfo.nickname
@@ -237,7 +237,7 @@ export default function MypageInfo ({ isLogedInhandler }) {
       })
     }
     else if (editNewNickname !== '' && !isExistNickname && validNickname) {
-      axios.put('api/users/profile', 
+      axios.put('/api/users/profile', 
       {
         image : `/images/users/${selectImg}.jpeg`,
         nickname : editNewNickname

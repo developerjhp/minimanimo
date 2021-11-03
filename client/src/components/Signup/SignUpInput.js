@@ -53,7 +53,7 @@ const SignUpInput = ({signUpInputInfo, setSignUpInputInfo, signUpValid, setSignU
     };
     //email 검증 useEffect
     if (emailExp.test(signUpInputInfo.email)) {
-      axios.post('api/validate/email', { email : signUpInputInfo.email }, config)
+      axios.post('/api/validate/email', { email : signUpInputInfo.email }, config)
         .then(res => { 
           //가입가능한 이메일이니 이것도 문구하나 띄워야됨
           setCheckEmailDupli(true)
@@ -68,7 +68,7 @@ const SignUpInput = ({signUpInputInfo, setSignUpInputInfo, signUpValid, setSignU
 
     //nickname 검증 useEffect
     if(nicknameExp.test(signUpInputInfo.nickname)){
-      axios.post( 'api/validate/nickname', { nickname : signUpInputInfo.nickname}, config)
+      axios.post( '/api/validate/nickname', { nickname : signUpInputInfo.nickname}, config)
       .then(res => {
         //사용 가능한 닉네임이니 문구하나 띄우기
         setCheckNickNameDupli(true)
