@@ -59,6 +59,13 @@ const ContentBox = styled.div`
     border-radius: 50%;
     border: 3px solid #387099;
   }
+
+  span {
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+    color: tomato;
+    /* margin-top: 0.4rem; */
+  }
 `
 const ImgWrap = styled.div`
   overflow: auto;
@@ -126,6 +133,15 @@ const CancelBtn = styled.button`
     border: 0.2rem solid #888;
   }
 `
+
+const IsValidNick = styled.div`
+  visibility: ${({visibility}) => visibility? 'hidden': 'visible'};
+  `
+
+const IsValidNick2 = styled.div`
+  visibility: ${({visibility}) => visibility? 'visible': 'hidden'};
+`
+
 
 export default function MypageInfo ({ isLogedInhandler }) {
   const newInputInfo = JSON.parse(localStorage.getItem('userInfo'))
@@ -283,8 +299,10 @@ export default function MypageInfo ({ isLogedInhandler }) {
           {/* input */}
           <img src={`/images/users/${selectImg}.jpeg`} alt="프로필 이미지" />
           <input type="nickname" placeholder="Edit New Nickname" value={editNewNickname} onChange={editNewNicknameHandler}/>
-          { editNewNickname === '' || validNickname  ? null : <span>닉네임은 공백제외 2글자 이상 10글자 이하여야 합니다.</span> }
-          { isExistNickname ? <span>중복된 닉네임입니다.</span> : null}
+          {/* { editNewNickname === '' || validNickname  ? null : <span>닉네임은 공백제외 2글자 이상 10글자 이하여야 합니다.</span> } */}
+          <IsValidNick  visibility={editNewNickname === '' || validNickname }><span>닉네임은 공백제외 2글자 이상 10글자 이하여야 합니다.</span></IsValidNick>
+          {/* { isExistNickname ? <span>중복된 닉네임입니다.</span> : null} */}
+          <IsValidNick2 visibility={isExistNickname}><span>중복된 닉네임입니다.</span></IsValidNick2>
         </ContentBox>
         <BtnWrap>
           <CancelBtn onClick={editModalhandler}>Cancle</CancelBtn>
