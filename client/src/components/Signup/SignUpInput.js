@@ -1,4 +1,4 @@
-import { useEffect } from 'react'; 
+import { useState, useEffect } from 'react'; 
 import styled from 'styled-components';
 import axios from 'axios';
 
@@ -40,6 +40,9 @@ const SignUpInput = ({signUpInputInfo, setSignUpInputInfo, signUpValid, setSignU
   let emailExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   let nicknameExp = /^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{1,10}$/;
   
+  const [checkEmailDupli, setCheckEmailDupli] = useState(true)
+  const [checkNickNameDupli, setCheckNickNameDupli] = useState(true)
+
   useEffect(() => {
     let emailExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let nicknameExp = /^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{1,10}$/;
@@ -49,13 +52,17 @@ const SignUpInput = ({signUpInputInfo, setSignUpInputInfo, signUpValid, setSignU
       },
     };
     //email 검증 useEffect
-    if (emailExp.test(signUpInputInfo.id)) {
+    if (emailExp.test(signUpInputInfo.email)) {
       axios.post('/api/validate/email', { email : signUpInputInfo.email }, config)
         .then(res => { 
           //가입가능한 이메일이니 이것도 문구하나 띄워야됨
-          console.log(res) })
+          setCheckEmailDupli(true)
+          console.log("2") 
+        })
         .catch(err => {
           //중복된 이메일이니 문구하나 띄워야됨.
+          setCheckEmailDupli(false)
+          console.log("1")
         })
     }
 
@@ -64,10 +71,12 @@ const SignUpInput = ({signUpInputInfo, setSignUpInputInfo, signUpValid, setSignU
       axios.post( '/api/validate/nickname', { nickname : signUpInputInfo.nickname}, config)
       .then(res => {
         //사용 가능한 닉네임이니 문구하나 띄우기
-        // console.log(res)
+        setCheckNickNameDupli(true)
+        console.log(res)
       })
       .catch(err => {
         //중복된 닉네임이니 문구하나 띄우기
+        setCheckNickNameDupli(false)
       })
     }
 
@@ -117,6 +126,7 @@ const SignUpInput = ({signUpInputInfo, setSignUpInputInfo, signUpValid, setSignU
       <label htmlFor="clickemail">Email</label>
       <input id="clickemail" type="email" placeholder="email" value={signUpInputInfo.email} onChange={validEmail}/>
       { signUpInputInfo.email === '' || signUpValid.email ?  null : <span>올바른 이메일 형식이 아닙니다.</span> }
+      {checkEmailDupli ? null : <span>이미 사용중인 이메일 주소 입니다.</span>}
 
       <label htmlFor="clickpwd2">Password</label>
       <input id="clickpwd2" type="password" placeholder="password" value={signUpInputInfo.password} onChange={validPassword}/>
@@ -129,6 +139,7 @@ const SignUpInput = ({signUpInputInfo, setSignUpInputInfo, signUpValid, setSignU
       <label htmlFor="clicknickname">Nickname</label>
       <input id="clicknickname" type="nickname" placeholder="nickname" value={signUpInputInfo.nickname} onChange={validNickName}/>
       { signUpInputInfo.nickname === '' || signUpValid.nickname  ? null : <span>닉네임은 공백제외 2글자 이상 10글자 이하여야 합니다.</span> }
+      {checkNickNameDupli ? null : <span>이미 사용중인 닉네임 입니다.</span>}
     </InputWrap>
   )
 }
