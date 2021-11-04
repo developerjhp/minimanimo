@@ -34,7 +34,7 @@
     "moment-timezone": "^0.5.33",
     "mongoose": "^6.0.12",
     "react-modal": "^3.14.3",
-    "validator": "^13.6.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "concurrently": "^6.3.0",
