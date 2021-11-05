@@ -74,6 +74,7 @@ const Nickname = styled.div`
   margin: 0 1rem;
   font-weight: bold;
   flex: 1 0 0;
+  margin-top: 0.2rem;
 `
 const Content = styled.div`
   height: 10vh;
