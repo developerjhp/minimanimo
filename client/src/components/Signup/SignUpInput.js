@@ -53,7 +53,7 @@ const SignUpInput = ({signUpInputInfo, setSignUpInputInfo, signUpValid, setSignU
     };
     //email 검증 useEffect
     if (emailExp.test(signUpInputInfo.email)) {
-      axios.post('http://ec2-3-37-98-188.ap-northeast-2.compute.amazonaw .com/api/validate/email', { email : signUpInputInfo.email }, config)
+      axios.post('http://ec2-3-37-98-188.ap-northeast-2.compute.amazonaws.com/api/validate/email', { email : signUpInputInfo.email }, config)
         .then(res => { 
           //가입가능한 이메일이니 이것도 문구하나 띄워야됨
           setCheckEmailDupli(true)

@@ -4,8 +4,14 @@ import axios from 'axios';
 import Header from '../components/Header';
 import MypageInfo from '../components/MypageInfo';
 import BoardList from '../components/BoardList';
+import styled from 'styled-components';
 
 
+const BoardListWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 
 const Mypage = ({ isLogedIn, isLogedInhandler }) => {
   //마이페이지에 처음 들어오면 서버에 get요청을 보내서 내 정보와 내가쓴글을 다 받아와야함.
@@ -38,7 +44,9 @@ const Mypage = ({ isLogedIn, isLogedInhandler }) => {
     {isLogedIn 
     ? <div>
         <MypageInfo isLogedInhandler={isLogedInhandler} />
-        <BoardList isLogedIn={isLogedIn} boardListData={myBoardListData} />
+        <BoardListWrap>
+          <BoardList isLogedIn={isLogedIn} boardListData={myBoardListData} />
+        </BoardListWrap>
       </div>
     : <>
         <Link to='/signin' ><img src={'/images/users/loginplz.png'} alt="로그인 한 이후에 mypage로 와주세요"></img></Link>

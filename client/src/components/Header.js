@@ -16,9 +16,13 @@ const StyledHeader = styled.header`
   > .profile {
     height: 4vh;
     line-height: 4vh;
+    margin-right: 18vw;
   }
   img {
     height: 8vh;
+  }
+  .test {
+    margin-left: 18vw;
   }
   .userinfo {
     font-size: 1.2rem;
@@ -82,7 +86,7 @@ export default function Header({ isLogedIn, isLogedInhandler }) {
   // Advanced: dropdown icon 삽입
   return <StyledHeader className="header">
     <div>
-      <Link to='/' className="logo"><img src={Symbol} alt="Symbol" /></Link>
+      <Link to='/' className="logo test"><img src={Symbol} alt="Symbol" /></Link>
     </div>
     <div className="profile" onMouseLeave={hideDropdown} show={show ? 1 : 0}
       onMouseEnter={showDropdown}>

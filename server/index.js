@@ -24,7 +24,7 @@ const app = express();
 app.use(express.json()); // body-parser
 app.use(
   cors({
-    origin: ['http://minimanimo.s3-website.ap-northeast-2.amazonaws.com'],
+    origin: ['http://www.minimanimo.site'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
   })
 );

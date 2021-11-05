@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom'
 
 const NewTweetWrap = styled.div`
-  height: 16vh;
+  height: 20vh;
   margin: 2rem 2rem 0;
   padding: 1.5rem;
   text-align: left;
@@ -14,20 +14,23 @@ const NewTweetWrap = styled.div`
   box-shadow: 0 0 0.4rem 0.2rem #eee;
   display: flex;
   flex-direction : row;
+  width: 60vw;
   
   img {
-    width: 5rem;
-    height: 5rem;
+    width: 6.2rem;
+    height: 6.2rem;
     border: 1px solid #eee;
     border-radius: 50%;
   }
 
   textarea {
-    height: 10vh;
+    margin-top: 1rem;;
+    height: 12vh;
     resize: none;
-    line-height: 1;
+    line-height: 1.2;
     border: 1px solid #e6e6e6;
-    flex: 7 0 0;
+    width: 45vw;
+    /* flex: 7 0 0; */
   }
   
   textarea:focus {
@@ -38,21 +41,33 @@ const NewTweetWrap = styled.div`
     font-style: italic;
   }
 `
+const ImgNickWrap = styled.div`
+  margin : 0 1rem 0 1rem;
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
 const Nickname = styled.div`
   height: 100%;
-  margin: 0 1rem;
+  margin: 0rem;
   font-weight: bold;
-  flex: 1 0 0;
+  /* flex: 1 0 0; */
   text-align: center;
+  margin-top: 0.5rem;
 `
 const SubmitBtn = styled.button`
-  height: 40%;
-  margin-left: 1rem;
+  height: 3vh;
+  width: 4vw;
+  /* margin-left: 1rem; */
   padding: 0.2rem;
   font-weight: bold;
   color: #fff;
   background: #387099;
-  flex: 2 0 0;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  /* flex: 2 0 0; */
 
   &:hover {
     background: #EDC51E;
@@ -60,6 +75,22 @@ const SubmitBtn = styled.button`
   &:disabled {
     background: #aaa;
   }
+`
+
+const TextWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  /* align-items: row; */
+  /* align-items: flex-end; */
+  flex : 8.5;
+  `
+const TextButtonWrap = styled.div`
+  display:flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-left: 1.5rem;
+  margin-right: 3rem;
+  margin-top: 0.5rem;
 `
 
 export default function BoardInput({ isLogedIn, setBoardListData }) {
@@ -108,15 +139,15 @@ export default function BoardInput({ isLogedIn, setBoardListData }) {
     }
   }
 
-  return (
-    <NewTweetWrap>
-      <div><img src={isLogedIn ? JSON.parse(localStorage.getItem('userInfo')).image : `/images/users/${Math.floor(Math.random() * 8) + 1
-}.jpeg`} alt="프로필 이미지" /></div>
-      <Nickname >{isLogedIn ? JSON.parse(localStorage.getItem('userInfo')).nickname : <Link to='/signin'>로그인을 해주세요</Link>}</Nickname>
-      {isLogedIn
-        ? <textarea type="text" value={newInputValue} onChange={newInputValueHandler} maxLength={255} />
-        : <textarea type="text" value="" disabled placeholder="로그인 후 작성 가능합니다." />}
-      <SubmitBtn disabled={isLogedIn ? false : true} onClick={submitBtnHandler}>Submit</SubmitBtn>
-    </NewTweetWrap>
+return (
+  <NewTweetWrap>
+    <ImgNickWrap><img src={isLogedIn ? JSON.parse(localStorage.getItem('userInfo')).image : `/images/users/${Math.floor(Math.random() * 8) + 1}.jpeg`} alt="프로필 이미지" />
+        <Nickname >{isLogedIn ? JSON.parse(localStorage.getItem('userInfo')).nickname : <Link to='/signin'>로그인을 해주세요</Link>}</Nickname>
+    </ImgNickWrap>
+    <TextWrap>{isLogedIn
+      ? <TextButtonWrap><textarea type="text" value={newInputValue} onChange={newInputValueHandler} maxLength={255} /><SubmitBtn disabled={isLogedIn ? false : true} onClick={submitBtnHandler}>Submit</SubmitBtn></TextButtonWrap>
+      : <TextButtonWrap><textarea type="text" value="" disabled placeholder="로그인 후 작성 가능합니다." /><SubmitBtn disabled={isLogedIn ? false : true} onClick={submitBtnHandler}>Submit</SubmitBtn></TextButtonWrap>}
+    </TextWrap>
+  </NewTweetWrap>
   )
 };
