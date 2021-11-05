@@ -3,7 +3,14 @@ import BoardInput from '../components/BoardInput';
 import BoardList from '../components/BoardList';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 
+const BoardWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+    
 const Main = ({ isLogedIn, isLogedInhandler }) => {
   const [boardListData, setBoardListData] = useState([]);
   
@@ -25,8 +32,10 @@ const Main = ({ isLogedIn, isLogedInhandler }) => {
 
   return <>
     <Header isLogedIn={isLogedIn} isLogedInhandler={isLogedInhandler} />
-    <BoardInput isLogedIn={isLogedIn} setBoardListData={setBoardListData} />
-    <BoardList isLogedIn={isLogedIn} boardListData={boardListData} />
+    <BoardWrap>
+      <BoardInput isLogedIn={isLogedIn} setBoardListData={setBoardListData} />
+      <BoardList isLogedIn={isLogedIn} boardListData={boardListData} />
+    </BoardWrap>
   </>
 }
 

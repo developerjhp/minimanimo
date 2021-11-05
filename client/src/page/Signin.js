@@ -12,6 +12,7 @@ const SigninContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: url('/images/lego.jpg');
 `
 const LogoImg = styled.img`
   width: 12vh;

@@ -12,6 +12,7 @@ const SignupContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: url('/images/lego.jpg');
 `
 const SignupWrap = styled.div`
   width: 50vh;
@@ -33,7 +34,7 @@ const PrevBtn = styled.div`
   left: 2rem;
   `
 
-const Signup = ({isLogedIn, isLogedInhandler}) => {
+const Signup = () => {
   const [signUpInputInfo, setSignUpInputInfo] = useState({ email: '', password: '', passwordCheck: '', nickname: '' });
   const [signUpValid, setSignUpValid] = useState({ email: false, password: false, passwordCheck: false, nickname: false });
   const [signUpAllCheck, setSignUpAllCheck] = useState(false); // useEffect로 변경

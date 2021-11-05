@@ -38,7 +38,7 @@ const App = () => {
           <Signin isLogedIn={isLogedIn} isLogedInhandler={isLogedInhandler} />
         </Route>
         <Route path='/signup'>
-          <Signup isLogedIn={isLogedIn} isLogedInhandler={isLogedInhandler} />
+          <Signup />
         </Route>
         <Route path='/mypage'>
           <Mypage isLogedIn={isLogedIn} isLogedInhandler={isLogedInhandler} />
